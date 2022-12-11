@@ -1,4 +1,6 @@
-import Head from 'next/head'
+import Head from 'next/head';
+
+import 'index.css'
 
 export default function Home() {
   return (
@@ -11,5 +13,5 @@ export default function Home() {
 
       Hello world
     </div>
-  )
+  );
 }
