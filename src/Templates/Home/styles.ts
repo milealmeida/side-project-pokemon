@@ -7,13 +7,22 @@ type TypeProps = {
 export const Wrapper = styled.section`
   background: linear-gradient(180deg, #ee8328 0%, #e14318 100%);
 
-  &::after {
-    content: '';
-    background: url();
+  .right {
+    position: absolute;
+    right: -6%;
+    top: 25%;
+  }
+
+  .left {
+    position: absolute;
+    left: -6%;
+    top: 216px;
+    transform: rotate(180deg);
   }
 `;
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 70px 24px;
@@ -60,7 +69,7 @@ export const Text = styled.p`
   margin-block: 0 24px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.a`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -72,7 +81,13 @@ export const Button = styled.button`
   font-size: 16px;
   line-height: 24px;
   /* --color-orange-1 */
-  color: #e14318;
+  color: red;
+  transition: 300ms opacity;
+
+  &::hover {
+    opacity: 0.8;
+    background-color: rebeccapurple;
+  }
 `;
 
 export const Box = styled.div``;

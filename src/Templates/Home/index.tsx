@@ -19,12 +19,20 @@ import {
 import fire from '../../../public/img/svg/fire.svg';
 import flying from '../../../public/img/svg/flying.svg';
 import bolt from '../../../public/img/svg/bolt.svg';
+import pokeball from '../../../public/img/svg/teste.svg';
 
 import charizard from '../../../public/img/charizard.png';
 
 export function HomeTemplate() {
   return (
     <Wrapper>
+      <Image
+        className="right"
+        src={pokeball}
+        alt="Pokeball"
+        width={400}
+        height={400}
+      />
       <Header />
       <Container>
         <Content>
@@ -47,7 +55,8 @@ export function HomeTemplate() {
             &quot;Mega Charizard X&quot;; No entanto, ele pode aprender ataques
             do tipo Dragão.
           </Text>
-          <Button type="button">
+
+          <Button>
             <Image src={bolt} alt="Ícone de raio" width={24} height={24} />
             Mais Detalhes
           </Button>
@@ -63,6 +72,14 @@ export function HomeTemplate() {
           <Image src={charizard} alt="Charizard" width={488} height={528} />
         </Box>
       </Container>
+
+      <Image
+        className="left"
+        src={pokeball}
+        alt="Pokeball"
+        width={400}
+        height={400}
+      />
     </Wrapper>
   );
 }
