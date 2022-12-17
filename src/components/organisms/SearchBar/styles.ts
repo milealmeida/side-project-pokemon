@@ -1,27 +1,32 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  max-width: 1216px;
+  max-width: 121.6rem;
   margin-inline: auto;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Divider = styled.div`
   margin: 3.6rem auto;
   max-width: 144rem;
   width: 100%;
-  height: 1px;
-  background: #24293f;
+  height: 0.1rem;
+  background: ${({ theme }) => theme.colors.blue[600]};
 `;
 
 export const Link = styled.a`
   font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: ${({ theme }) => theme.colors.white};
 
-  background: linear-gradient(180deg, #151a37 0%, rgba(21, 26, 55, 0) 100%);
-  border: 1px solid #24293f;
-  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    ${({ theme }) => theme.colors.blue[700]} 0%,
+    rgba(21, 26, 55, 0) 100%
+  );
+  border: 0.1rem solid ${({ theme }) => theme.colors.blue[600]};
+  border-radius: 0.8rem;
 
   display: flex;
   gap: 0.8rem;
@@ -38,9 +43,8 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   font-weight: 700;
-  font-size: 24px;
-  line-height: 32px;
-  color: #ffffff;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
   margin-block: 2.4rem 1.6rem;
 `;
 

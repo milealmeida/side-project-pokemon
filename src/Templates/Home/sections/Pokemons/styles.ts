@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.section`
-  background: #060b28;
-  padding: 7.2rem 0;
+  background: ${({ theme }) => theme.colors.blue[800]};
+  padding-block: 7.2rem;
 `;
