@@ -12,27 +12,19 @@ import {
   Button,
   Box,
   Divider,
-  Teste1,
-  Teste2,
+  DividerUp,
+  DividerDown,
 } from './styles';
 
 import fire from '../../../public/img/svg/fire.svg';
 import flying from '../../../public/img/svg/flying.svg';
 import bolt from '../../../public/img/svg/bolt.svg';
-import pokeball from '../../../public/img/svg/teste.svg';
 
 import charizard from '../../../public/img/charizard.png';
 
 export function HomeTemplate() {
   return (
     <Wrapper>
-      <Image
-        className="right"
-        src={pokeball}
-        alt="Pokeball"
-        width={400}
-        height={400}
-      />
       <Header />
       <Container>
         <Content>
@@ -63,23 +55,15 @@ export function HomeTemplate() {
         </Content>
 
         <Divider>
-          <Teste1 />
+          <DividerUp />
           <Image src={fire} alt="Ícone de fogo" width={56} height={56} />
-          <Teste2 />
+          <DividerDown />
         </Divider>
 
         <Box>
           <Image src={charizard} alt="Charizard" width={488} height={528} />
         </Box>
       </Container>
-
-      <Image
-        className="left"
-        src={pokeball}
-        alt="Pokeball"
-        width={400}
-        height={400}
-      />
     </Wrapper>
   );
 }

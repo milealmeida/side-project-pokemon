@@ -5,19 +5,32 @@ type TypeProps = {
 };
 
 export const Wrapper = styled.section`
-  background: linear-gradient(180deg, #ee8328 0%, #e14318 100%);
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    ${({ theme }) => theme.colors.orange[400]} 0%,
+    ${({ theme }) => theme.colors.orange[500]} 100%
+  );
 
-  .right {
+  &::before {
     position: absolute;
-    right: -6%;
-    top: 25%;
+    top: 17rem;
+    left: 0;
+    content: '';
+    width: 20rem;
+    height: 40rem;
+    background: url('./img/svg/bg-pokeball.svg') no-repeat;
+    transform: rotate(180deg);
   }
 
-  .left {
+  &::after {
     position: absolute;
-    left: -6%;
-    top: 216px;
-    transform: rotate(180deg);
+    top: 17rem;
+    right: 0;
+    content: '';
+    width: 20rem;
+    height: 40rem;
+    background: url('./img/svg/bg-pokeball.svg') no-repeat;
   }
 `;
 
@@ -25,68 +38,75 @@ export const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding: 70px 24px;
+  padding: 7rem 2.4rem;
+  max-width: 120rem;
+  margin-inline: auto;
 `;
 
 export const Content = styled.div`
-  color: #ffffff;
-  max-width: 416px;
+  color: ${({ theme }) => theme.colors.white};
+  max-width: 41.6rem;
 `;
 
 export const Number = styled.span`
   font-weight: 700;
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
 `;
 
 export const Types = styled.div`
   display: flex;
-  gap: 8px;
-  margin-block: 8px;
+  gap: 0.8rem;
+  margin-block: 0.8rem;
 `;
 
 export const Type = styled.div<TypeProps>`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   background-color: ${({ color }) => color};
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 24px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 `;
 
 export const Title = styled.h1`
   font-weight: 700;
-  font-size: 64px;
-  line-height: 86px;
+  font-size: 6.4rem;
+  line-height: 8.6rem;
   margin: 0;
 `;
 
 export const Text = styled.p`
-  font-size: 16px;
-  line-height: 24px;
-  margin-block: 0 24px;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  margin-block: 0 2.4rem;
 `;
 
 export const Button = styled.a`
   display: flex;
   align-items: center;
-  gap: 8px;
-  background-color: #ffffff;
+  gap: 0.8rem;
+  background-color: ${({ theme }) => theme.colors.white};
   border: none;
-  border-radius: 8px;
-  padding: 12px 133px;
+  border-radius: 0.8rem;
+  padding: 1.2rem 13.3rem;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  /* --color-orange-1 */
-  color: red;
-  transition: 300ms opacity;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: ${({ theme }) => theme.colors.orange[500]};
+  transition: 300ms background;
+  cursor: pointer;
 
-  &::hover {
-    opacity: 0.8;
-    background-color: rebeccapurple;
+  &:hover {
+    color: ${({ theme }) => theme.colors.orange[600]};
+    background-color: ${({ theme }) => theme.colors.gray[100]};
+
+    img {
+      filter: brightness(0) saturate(100%) invert(21%) sepia(94%)
+        saturate(2223%) hue-rotate(12deg) brightness(95%) contrast(89%);
+    }
   }
 `;
 
@@ -96,17 +116,25 @@ export const Divider = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 2.4rem;
 `;
 
-export const Teste1 = styled.div`
-  width: 1px;
-  height: 212px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+export const DividerUp = styled.div`
+  width: 0.1rem;
+  height: 21.2rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    ${({ theme }) => theme.colors.white} 100%
+  );
 `;
 
-export const Teste2 = styled.div`
-  width: 1px;
-  height: 212px;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+export const DividerDown = styled.div`
+  width: 0.1rem;
+  height: 21.2rem;
+  background: linear-gradient(
+    180deg,
+    ${({ theme }) => theme.colors.white} 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
 `;
