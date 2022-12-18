@@ -1,5 +1,7 @@
 import Image from 'next/image';
-import { Header } from '../../components';
+
+import { Header } from 'components';
+
 import {
   Wrapper,
   Container,
@@ -10,17 +12,10 @@ import {
   Title,
   Text,
   Button,
-  Box,
   Divider,
   DividerUp,
   DividerDown,
 } from './styles';
-
-import fire from '../../../public/img/svg/fire.svg';
-import flying from '../../../public/img/svg/flying.svg';
-import bolt from '../../../public/img/svg/bolt.svg';
-
-import charizard from '../../../public/img/charizard.png';
 
 export function HomeTemplate() {
   return (
@@ -31,11 +26,21 @@ export function HomeTemplate() {
           <Number>#006</Number>
           <Types>
             <Type color="#FF9900">
-              <Image src={fire} alt="Ícone de fogo" width={16} height={16} />
+              <Image
+                src="/img/svg/fire.svg"
+                alt="Ícone de fogo"
+                width={16}
+                height={16}
+              />
               Fire
             </Type>
             <Type color="#89BDFF">
-              <Image src={flying} alt="Ícone de asas" width={16} height={16} />
+              <Image
+                src="/img/svg/flying.svg"
+                alt="Ícone de asas"
+                width={16}
+                height={16}
+              />
               Flying
             </Type>
           </Types>
@@ -49,20 +54,35 @@ export function HomeTemplate() {
           </Text>
 
           <Button>
-            <Image src={bolt} alt="Ícone de raio" width={24} height={24} />
+            <Image
+              src="/img/svg/bolt.svg"
+              alt="Ícone de raio"
+              width={24}
+              height={24}
+            />
             Mais Detalhes
           </Button>
         </Content>
 
         <Divider>
           <DividerUp />
-          <Image src={fire} alt="Ícone de fogo" width={56} height={56} />
+          <Image
+            src="/img/svg/fire.svg"
+            alt="Ícone de fogo"
+            width={56}
+            height={56}
+          />
           <DividerDown />
         </Divider>
 
-        <Box>
-          <Image src={charizard} alt="Charizard" width={488} height={528} />
-        </Box>
+        <div>
+          <Image
+            src="/img/charizard.png"
+            alt="Charizard"
+            width={488}
+            height={528}
+          />
+        </div>
       </Container>
     </Wrapper>
   );

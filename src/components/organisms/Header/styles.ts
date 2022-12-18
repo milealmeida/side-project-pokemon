@@ -9,8 +9,6 @@ export const Wrapper = styled.header`
   max-width: 120rem;
 `;
 
-export const Links = styled.nav``;
-
 export const Link = styled.a`
   &:hover {
     opacity: 0.8;
