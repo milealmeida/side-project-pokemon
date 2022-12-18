@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Divider = styled.div`
-  margin: 3.6rem auto;
+  margin: 3.6rem auto 20.4rem;
   max-width: 144rem;
   width: 100%;
   height: 0.1rem;

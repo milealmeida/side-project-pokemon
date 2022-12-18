@@ -16,7 +16,6 @@ import {
 } from './styles';
 
 import fire from '../../../../../public/img/svg/fire.svg';
-import flying from '../../../../../public/img/svg/flying.svg';
 import bolt from '../../../../../public/img/svg/bolt.svg';
 
 import charizard from '../../../../../public/img/charizard.png';
@@ -29,8 +28,8 @@ export function Hero() {
         <Content>
           <Number>#006</Number>
           <Types>
-            <Type type="Fire" color="#FF9900" src={fire} alt="fogo" />
-            <Type type="Flying" color="#89BDFF" src={flying} alt="asas" />
+            <Type type="fire" />
+            <Type type="flying" />
           </Types>
           <Title>CHARIZARD</Title>
           <Text>
