@@ -5,13 +5,13 @@ type BgColorProps = Pick<CardProps, 'bgColor'>;
 
 export const Wrapper = styled.div<BgColorProps>`
   position: relative;
-  max-width: 384px;
+  max-width: 38.4rem;
   width: 100%;
   background: rgba(6, 11, 40, 0.15);
-  border: 1px solid #24293f;
-  border-radius: 24px;
+  border: 0.1rem solid ${({ theme }) => theme.colors.blue[600]};
+  border-radius: 2.4rem;
   text-align: center;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 
   .pokemon {
     position: absolute;
@@ -25,7 +25,7 @@ export const Wrapper = styled.div<BgColorProps>`
     width: 12.5rem;
     height: 12.5rem;
     background: ${({ bgColor }) => bgColor};
-    filter: blur(128px);
+    filter: blur(12.8rem);
     position: absolute;
     top: 10rem;
     left: 50%;
@@ -37,15 +37,15 @@ export const Wrapper = styled.div<BgColorProps>`
 export const Number = styled.span`
   display: block;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 27px;
+  font-size: 2rem;
+  line-height: 2.7rem;
   margin-top: 11.2rem;
 `;
 
 export const Name = styled.h1`
   font-weight: 700;
-  font-size: 32px;
-  line-height: 43px;
+  font-size: 3.2rem;
+  line-height: 4.3rem;
   margin: 0.4rem 0 1.2rem 0;
 `;
 
@@ -63,8 +63,8 @@ export const Container = styled.div`
 `;
 
 export const Info = styled.p`
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 
   display: flex;
   flex-direction: column;
@@ -79,9 +79,9 @@ export const Info = styled.p`
 
 export const Details = styled.button<BgColorProps>`
   font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: ${({ theme }) => theme.colors.white};
   background: ${({ bgColor }) => bgColor};
   border: none;
   width: 100%;
@@ -89,7 +89,7 @@ export const Details = styled.button<BgColorProps>`
   justify-content: center;
   gap: 0.8rem;
   padding-block: 1.2rem;
-  border-radius: 0px 0px 24px 24px;
+  border-radius: 0 0 2.4rem 2.4rem;
   cursor: pointer;
   transition: all 300ms;
 

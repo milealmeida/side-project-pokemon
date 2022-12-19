@@ -7,7 +7,6 @@ export const handleTypes = (type: string) => {
   };
 
   const bug = {
-    type: '',
     color: '#7BCF00',
     src: '/img/svg/bug.svg',
     alt: 'Ícone de um inseto',

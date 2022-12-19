@@ -1,10 +1,6 @@
 import { Card, SearchBar } from '../../../../components';
 import { Container, Wrapper } from './styles';
 
-import charmander from '../../../../../public/img/charmander.png';
-import bulbasaur from '../../../../../public/img/bulbasaur.png';
-import squirtle from '../../../../../public/img/squirtle.png';
-
 export function Pokemons() {
   return (
     <Wrapper>
@@ -13,7 +9,17 @@ export function Pokemons() {
       <Container>
         <Card
           bgColor="#1CD80E"
-          src={bulbasaur}
+          src="/img/bulbasaur.png"
+          number="#001"
+          name="Bulbasaur"
+          type="grass"
+          type2="poison"
+          weight="6.9"
+          height="0.7"
+        />
+        <Card
+          bgColor="#1CD80E"
+          src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
           type="grass"
@@ -22,19 +28,11 @@ export function Pokemons() {
         />
         <Card
           bgColor="#1CD80E"
-          src={bulbasaur}
+          src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
           type="grass"
-          weight="6.9"
-          height="0.7"
-        />
-        <Card
-          bgColor="#1CD80E"
-          src={bulbasaur}
-          number="#001"
-          name="Bulbasaur"
-          type="grass"
+          type2="poison"
           weight="6.9"
           height="0.7"
         />
@@ -43,7 +41,7 @@ export function Pokemons() {
       <Container>
         <Card
           bgColor="#ff9900"
-          src={charmander}
+          src="/img/charmander.png"
           number="#004"
           name="Charmander"
           type="fire"
@@ -52,7 +50,7 @@ export function Pokemons() {
         />
         <Card
           bgColor="#ff9900"
-          src={charmander}
+          src="/img/charmander.png"
           number="#004"
           name="Charmander"
           type="fire"
@@ -61,7 +59,7 @@ export function Pokemons() {
         />
         <Card
           bgColor="#ff9900"
-          src={charmander}
+          src="/img/charmander.png"
           number="#004"
           name="Charmander"
           type="fire"
@@ -73,7 +71,7 @@ export function Pokemons() {
       <Container>
         <Card
           bgColor="#14A8FF"
-          src={squirtle}
+          src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
           type="water"
@@ -82,7 +80,7 @@ export function Pokemons() {
         />
         <Card
           bgColor="#14A8FF"
-          src={squirtle}
+          src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
           type="water"
@@ -91,7 +89,7 @@ export function Pokemons() {
         />
         <Card
           bgColor="#14A8FF"
-          src={squirtle}
+          src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
           type="water"

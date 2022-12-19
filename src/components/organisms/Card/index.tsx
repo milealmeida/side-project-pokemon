@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { Type } from '../../atoms/Type';
 import {
   Container,
@@ -10,15 +10,12 @@ import {
   Wrapper,
 } from './styles';
 
-import weightIcon from '../../../../public/img/svg/weight.svg';
-import ruler from '../../../../public/img/svg/ruler.svg';
-import bolt from '../../../../public/img/svg/bolt.svg';
-
 export type CardProps = {
-  src: StaticImageData;
+  src: string;
   number: string;
   name: string;
   type: string;
+  type2?: string;
   weight: string;
   height: string;
   bgColor: string;
@@ -29,6 +26,7 @@ export function Card({
   number,
   name,
   type,
+  type2,
   weight,
   height,
   bgColor,
@@ -47,13 +45,14 @@ export function Card({
 
       <Types>
         <Type type={type} />
+        {type2 && <Type type={type2} />}
       </Types>
 
       <Container>
         <Info>
           <strong>
             <Image
-              src={weightIcon}
+              src="/img/svg/weight.svg"
               alt="Ícone de uma balança"
               width={24}
               height={24}
@@ -66,7 +65,7 @@ export function Card({
         <Info>
           <strong>
             <Image
-              src={ruler}
+              src="/img/svg/ruler.svg"
               alt="Ícone de uma régua"
               width={24}
               height={24}
@@ -78,7 +77,12 @@ export function Card({
       </Container>
 
       <Details bgColor={bgColor}>
-        <Image src={bolt} alt="Íconde de um raio" width={24} height={24} />
+        <Image
+          src="/img/svg/bolt.svg"
+          alt="Íconde de um raio"
+          width={24}
+          height={24}
+        />
         Mais Detalhes
       </Details>
     </Wrapper>
