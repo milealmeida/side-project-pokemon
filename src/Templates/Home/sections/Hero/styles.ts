@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-type TypeProps = {
-  color: string;
-};
-
 export const Wrapper = styled.section`
   position: relative;
   background: linear-gradient(
@@ -58,17 +54,6 @@ export const Types = styled.div`
   display: flex;
   gap: 0.8rem;
   margin-block: 0.8rem;
-`;
-
-export const Type = styled.div<TypeProps>`
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  background-color: ${({ color }) => color};
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.8rem;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
 `;
 
 export const Title = styled.h1`
