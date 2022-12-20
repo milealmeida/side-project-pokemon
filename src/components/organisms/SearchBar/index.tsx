@@ -13,6 +13,7 @@ import {
 } from './styles';
 
 import { InputComponent } from '../../atoms/Input';
+import { types } from './types';
 
 export function SearchBar() {
   return (
@@ -37,17 +38,13 @@ export function SearchBar() {
               height={32}
             />
           </LeftArrow>
+
           <Types>
-            <Type type="fire" />
-            <Type type="flying" />
-            <Type type="bug" />
-            <Type type="dark" />
-            <Type type="dragon" />
-            <Type type="eletric" />
-            <Type type="grass" />
-            <Type type="poison" />
-            <Type type="water" />
+            {types.map(({ id, type }) => (
+              <Type key={id} type={type} />
+            ))}
           </Types>
+
           <RightArrow>
             <Image
               src="/img/svg/right-arrow.svg"
