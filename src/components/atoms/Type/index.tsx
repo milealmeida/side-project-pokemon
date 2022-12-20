@@ -1,14 +1,13 @@
 import Image from 'next/image';
+import { PkmTypesEnum, getFormattedPkmType } from 'utils/getFormattedPkmType';
 import { Wrapper } from './styles';
 
-import { handleTypes } from './content';
-
 type TypeProps = {
-  type: string;
+  type: PkmTypesEnum;
 };
 
 export function Type({ type }: TypeProps) {
-  const { color, src, alt, name } = handleTypes(type);
+  const { color, src, alt, name } = getFormattedPkmType(type);
 
   return (
     <Wrapper color={color}>
