@@ -1,4 +1,4 @@
-import { Card, SearchBar } from '../../../../components';
+import { Card, SearchBar } from 'components';
 import { Container, Wrapper } from './styles';
 
 export function Pokemons() {

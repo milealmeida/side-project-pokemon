@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Header, Type } from '../../../../components';
+import { Header, Type } from 'components';
 import {
   Wrapper,
   Container,
@@ -9,16 +9,10 @@ import {
   Title,
   Text,
   Button,
-  Box,
   Divider,
   DividerUp,
   DividerDown,
 } from './styles';
-
-import fire from '../../../../../public/img/svg/fire.svg';
-import bolt from '../../../../../public/img/svg/bolt.svg';
-
-import charizard from '../../../../../public/img/charizard.png';
 
 export function Hero() {
   return (
@@ -41,20 +35,35 @@ export function Hero() {
           </Text>
 
           <Button>
-            <Image src={bolt} alt="Ícone de raio" width={24} height={24} />
+            <Image
+              src="/img/svg/bolt.svg"
+              alt="Ícone de raio"
+              width={24}
+              height={24}
+            />
             Mais Detalhes
           </Button>
         </Content>
 
         <Divider>
           <DividerUp />
-          <Image src={fire} alt="Ícone de fogo" width={56} height={56} />
+          <Image
+            src="/img/svg/fire.svg"
+            alt="Ícone de fogo"
+            width={56}
+            height={56}
+          />
           <DividerDown />
         </Divider>
 
-        <Box>
-          <Image src={charizard} alt="Charizard" width={488} height={528} />
-        </Box>
+        <div>
+          <Image
+            src="/img/charizard.png"
+            alt="Charizard"
+            width={488}
+            height={528}
+          />
+        </div>
       </Container>
     </Wrapper>
   );

@@ -95,8 +95,6 @@ export const Button = styled.a`
   }
 `;
 
-export const Box = styled.div``;
-
 export const Divider = styled.div`
   display: flex;
   flex-direction: column;

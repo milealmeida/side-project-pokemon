@@ -12,17 +12,18 @@ import {
   Wrapper,
 } from './styles';
 
-import home from '../../../../public/img/svg/home.svg';
-import leftArrow from '../../../../public/img/svg/left-arrow.svg';
-import rightArrow from '../../../../public/img/svg/right-arrow.svg';
-
 import { InputComponent } from '../../atoms/Input';
 
 export function SearchBar() {
   return (
     <Wrapper>
       <Link href="/">
-        <Image src={home} alt="Ícone de uma casa" width={24} height={24} />
+        <Image
+          src="/img/svg/home.svg"
+          alt="Ícone de uma casa"
+          width={24}
+          height={24}
+        />
         Início
       </Link>
       <Title>Pesquisar por tipos</Title>
@@ -30,7 +31,7 @@ export function SearchBar() {
         <Box>
           <LeftArrow>
             <Image
-              src={leftArrow}
+              src="/img/svg/left-arrow.svg"
               alt="Ícone de uma seta apontada para esquerda"
               width={32}
               height={32}
@@ -49,7 +50,7 @@ export function SearchBar() {
           </Types>
           <RightArrow>
             <Image
-              src={rightArrow}
+              src="/img/svg/right-arrow.svg"
               alt="Ícone de uma seta apontada para direita"
               width={32}
               height={32}
