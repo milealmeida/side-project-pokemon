@@ -1,18 +1,19 @@
 import Image from 'next/image';
+import { PokemonTypes } from 'types/pokemonTypes';
+import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Wrapper } from './styles';
 
-export type TypeProps = {
-  type: string;
-  color: string;
-  src: string;
-  alt: string;
+type TypeProps = {
+  type: PokemonTypes;
 };
 
-export function Type({ type, color, src, alt }: TypeProps) {
+export function Type({ type }: TypeProps) {
+  const { color, src, alt, name } = getFormattedPokemonType(type);
+
   return (
     <Wrapper color={color}>
-      <Image src={src} alt={`Ícone de ${alt}`} width={16} height={16} />
-      {type}
+      <Image src={src} alt={alt} width={16} height={16} />
+      {name}
     </Wrapper>
   );
 }

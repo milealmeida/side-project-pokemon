@@ -22,18 +22,8 @@ export function Hero() {
         <Content>
           <Number>#006</Number>
           <Types>
-            <Type
-              type="Fire"
-              color="#FF9900"
-              src="/img/svg/fire.svg"
-              alt="fogo"
-            />
-            <Type
-              type="Flying"
-              color="#89BDFF"
-              src="/img/svg/flying.svg"
-              alt="asas"
-            />
+            <Type type="fire" />
+            <Type type="flying" />
           </Types>
           <Title>CHARIZARD</Title>
           <Text>

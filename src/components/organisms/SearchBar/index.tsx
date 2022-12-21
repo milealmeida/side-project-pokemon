@@ -13,6 +13,7 @@ import {
 } from './styles';
 
 import { InputComponent } from '../../atoms/Input';
+import { types } from './types';
 
 export function SearchBar() {
   return (
@@ -37,62 +38,13 @@ export function SearchBar() {
               height={32}
             />
           </LeftArrow>
+
           <Types>
-            <Type
-              type="Fire"
-              color="#FF9900"
-              src="/img/svg/fire.svg"
-              alt="fogo"
-            />
-            <Type
-              type="Flying"
-              color="#89BDFF"
-              src="/img/svg/flying.svg"
-              alt="asas"
-            />
-            <Type
-              type="Bug"
-              color="#7BCF00"
-              src="/img/svg/bug.svg"
-              alt="inseto"
-            />
-            <Type
-              type="Dark"
-              color="#5A566A"
-              src="/img/svg/dark.svg"
-              alt="lua"
-            />
-            <Type
-              type="Dragon"
-              color="#0076FF"
-              src="/img/svg/dragon.svg"
-              alt="dragão"
-            />
-            <Type
-              type="Eletric"
-              color="#FFDE00"
-              src="/img/svg/eletric.svg"
-              alt="raio"
-            />
-            <Type
-              type="Grass"
-              color="#1CD80E"
-              src="/img/svg/grass.svg"
-              alt="folha"
-            />
-            <Type
-              type="Poison"
-              color="#F149FF"
-              src="/img/svg/poison.svg"
-              alt="veneno"
-            />
-            <Type
-              type="Water"
-              color="#14A8FF"
-              src="/img/svg/water.svg"
-              alt="gota d'água"
-            />
+            {types.map(({ id, type }) => (
+              <Type key={id} type={type} />
+            ))}
           </Types>
+
           <RightArrow>
             <Image
               src="/img/svg/right-arrow.svg"

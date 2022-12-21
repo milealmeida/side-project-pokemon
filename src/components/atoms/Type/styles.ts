@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { TypeProps } from '.';
 
-type WrapperProps = Pick<TypeProps, 'color'>;
+type WrapperProps = {
+  color: string;
+};
 
 export const Wrapper = styled.div<WrapperProps>`
   display: flex;

@@ -23,6 +23,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
+    "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
@@ -37,7 +38,13 @@
         "tsx": "never"
       }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": true
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
