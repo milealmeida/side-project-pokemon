@@ -1,4 +1,5 @@
 import Image from 'next/image';
+// import { PokemonTypes } from 'types/pokemonTypes';
 import { Type } from '../../atoms/Type';
 import {
   Container,
@@ -10,39 +11,27 @@ import {
   Wrapper,
 } from './styles';
 
-// export type CardProps = {
-//   src: string;
-//   number: string;
-//   name: string;
-//   type: string;
-//   type2?: string;
-//   weight: string;
-//   height: string;
-//   bgColor: string;
-// };
-
-type OptionalCardProps = {
-  type2?: string;
+export type CardProps = {
+  src: string;
+  number: string;
+  name: string;
+  type: string;
+  weight: string;
+  height: string;
+  bgColor: string;
 };
-
-export type CardProps = OptionalCardProps &
-  Record<
-    'src' | 'number' | 'name' | 'type' | 'weight' | 'height' | 'bgColor',
-    string
-  >;
-
-// Acima uma forma diferente de criar uma tipagem que todos os valores sao string, nao precisa deixar dessa forma se voce nao quiser usar assim, mas e bom voce saber que existe essa forma.
 
 export function Card({
   src,
   number,
   name,
   type,
-  type2,
   weight,
   height,
   bgColor,
 }: CardProps) {
+  const pokemonsType = type.split(' ');
+
   return (
     <Wrapper bgColor={bgColor}>
       <Image
@@ -56,8 +45,9 @@ export function Card({
       <Name>{name}</Name>
 
       <Types>
-        <Type type={type} />
-        {type2 && <Type type={type2} />}
+        {pokemonsType.map(pokemonType => (
+          <Type type={pokemonType} />
+        ))}
       </Types>
 
       <Container>

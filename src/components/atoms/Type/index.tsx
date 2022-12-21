@@ -1,13 +1,14 @@
 import Image from 'next/image';
-import { PkmTypesEnum, getFormattedPkmType } from 'utils/getFormattedPkmType';
+import { PokemonTypes } from 'types/pokemonTypes';
+import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Wrapper } from './styles';
 
 type TypeProps = {
-  type: PkmTypesEnum;
+  type: any;
 };
 
 export function Type({ type }: TypeProps) {
-  const { color, src, alt, name } = getFormattedPkmType(type);
+  const { color, src, alt, name } = getFormattedPokemonType(type);
 
   return (
     <Wrapper color={color}>

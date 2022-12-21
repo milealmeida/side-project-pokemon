@@ -12,8 +12,7 @@ export function Pokemons() {
           src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
-          type="grass"
-          type2="poison"
+          type="grass poison"
           weight="6.9"
           height="0.7"
         />
@@ -31,8 +30,7 @@ export function Pokemons() {
           src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
-          type="grass"
-          type2="poison"
+          type="grass poison"
           weight="6.9"
           height="0.7"
         />
@@ -53,7 +51,7 @@ export function Pokemons() {
           src="/img/charmander.png"
           number="#004"
           name="Charmander"
-          type="fire"
+          type="fire flying"
           weight="8.5"
           height="0.6"
         />
@@ -74,7 +72,7 @@ export function Pokemons() {
           src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
-          type="water"
+          type="water bug"
           weight="9"
           height="0.5"
         />

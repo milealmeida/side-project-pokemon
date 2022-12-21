@@ -8,4 +8,4 @@ export const types = [
   { id: 7, type: 'grass' },
   { id: 8, type: 'poison' },
   { id: 9, type: 'water' },
-];
+] as const;

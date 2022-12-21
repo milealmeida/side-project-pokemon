@@ -17,6 +17,6 @@ const theme = {
       800: '#060b28',
     },
   },
-} as const;
+};
 
 export default theme;
