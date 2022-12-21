@@ -4,7 +4,7 @@ import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Wrapper } from './styles';
 
 type TypeProps = {
-  type: any;
+  type: PokemonTypes;
 };
 
 export function Type({ type }: TypeProps) {

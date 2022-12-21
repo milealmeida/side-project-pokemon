@@ -3,7 +3,7 @@ import { CardProps } from '.';
 
 type BgColorProps = Pick<CardProps, 'bgColor'>;
 
-export const Wrapper = styled.div<BgColorProps>`
+export const Wrapper = styled.div`
   position: relative;
   max-width: 38.4rem;
   width: 100%;
@@ -18,6 +18,21 @@ export const Wrapper = styled.div<BgColorProps>`
     top: -17.2rem;
     right: 5rem;
   }
+`;
+
+export const Content = styled.div`
+  position: relative;
+  z-index: 1;
+`;
+
+export const Blur = styled.div<BgColorProps>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2.4rem;
+
+  z-index: 0;
 
   &::before {
     content: '';
@@ -30,7 +45,6 @@ export const Wrapper = styled.div<BgColorProps>`
     top: 10rem;
     left: 50%;
     transform: translateX(-50%);
-    transition: all 0.8s ease 0s;
   }
 `;
 

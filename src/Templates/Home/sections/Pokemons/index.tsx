@@ -12,7 +12,7 @@ export function Pokemons() {
           src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
-          type="grass poison"
+          types={['grass', 'poison']}
           weight="6.9"
           height="0.7"
         />
@@ -21,7 +21,7 @@ export function Pokemons() {
           src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
-          type="grass"
+          types={['grass']}
           weight="6.9"
           height="0.7"
         />
@@ -30,7 +30,7 @@ export function Pokemons() {
           src="/img/bulbasaur.png"
           number="#001"
           name="Bulbasaur"
-          type="grass poison"
+          types={['grass', 'poison']}
           weight="6.9"
           height="0.7"
         />
@@ -42,7 +42,7 @@ export function Pokemons() {
           src="/img/charmander.png"
           number="#004"
           name="Charmander"
-          type="fire"
+          types={['fire']}
           weight="8.5"
           height="0.6"
         />
@@ -51,7 +51,7 @@ export function Pokemons() {
           src="/img/charmander.png"
           number="#004"
           name="Charmander"
-          type="fire flying"
+          types={['fire', 'flying']}
           weight="8.5"
           height="0.6"
         />
@@ -60,7 +60,7 @@ export function Pokemons() {
           src="/img/charmander.png"
           number="#004"
           name="Charmander"
-          type="fire"
+          types={['fire']}
           weight="8.5"
           height="0.6"
         />
@@ -72,7 +72,7 @@ export function Pokemons() {
           src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
-          type="water bug"
+          types={['water', 'bug']}
           weight="9"
           height="0.5"
         />
@@ -81,7 +81,7 @@ export function Pokemons() {
           src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
-          type="water"
+          types={['water']}
           weight="9"
           height="0.5"
         />
@@ -90,7 +90,7 @@ export function Pokemons() {
           src="/img/squirtle.png"
           number="#007"
           name="Squirtle"
-          type="water"
+          types={['water']}
           weight="9"
           height="0.5"
         />
