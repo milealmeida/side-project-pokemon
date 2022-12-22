@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Header, Type } from 'components';
+import { Header, Type, Button } from 'components';
 import {
   Wrapper,
   Container,
@@ -8,10 +8,10 @@ import {
   Types,
   Title,
   Text,
-  Button,
   Divider,
   DividerUp,
   DividerDown,
+  Box,
 } from './styles';
 
 export function Hero() {
@@ -34,15 +34,7 @@ export function Hero() {
             do tipo Dragão.
           </Text>
 
-          <Button>
-            <Image
-              src="/img/svg/bolt.svg"
-              alt="Ícone de raio"
-              width={24}
-              height={24}
-            />
-            Mais Detalhes
-          </Button>
+          <Button text="Mais Detalhes" />
         </Content>
 
         <Divider>
@@ -56,14 +48,14 @@ export function Hero() {
           <DividerDown />
         </Divider>
 
-        <div>
+        <Box>
           <Image
             src="/img/charizard.png"
             alt="Charizard"
             width={488}
             height={528}
           />
-        </div>
+        </Box>
       </Container>
     </Wrapper>
   );

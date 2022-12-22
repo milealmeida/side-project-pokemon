@@ -6,6 +6,13 @@ export const Wrapper = styled.div`
   border-radius: 0.8rem;
   max-width: 48.8rem;
   width: 100%;
+  transition: box-shadow 300ms;
+
+  &:hover {
+    -webkit-box-shadow: 0 0 2.9rem -0.9rem ${({ theme }) => theme.colors.blue[100]};
+    -moz-box-shadow: 0 0 2.9rem -0.9rem ${({ theme }) => theme.colors.blue[100]};
+    box-shadow: 0 0 2.9rem -0.9rem ${({ theme }) => theme.colors.blue[100]};
+  }
 `;
 
 export const Input = styled.input`
