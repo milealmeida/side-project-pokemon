@@ -1,3 +1,4 @@
+import { Footer } from 'components';
 import { Hero, Pokemons } from './sections';
 
 export function HomeTemplate() {
@@ -5,6 +6,7 @@ export function HomeTemplate() {
     <>
       <Hero />
       <Pokemons />
+      <Footer />
     </>
   );
 }

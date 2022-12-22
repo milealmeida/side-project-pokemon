@@ -11,6 +11,7 @@ import {
   Divider,
   DividerUp,
   DividerDown,
+  Box,
 } from './styles';
 
 export function Hero() {
@@ -47,14 +48,14 @@ export function Hero() {
           <DividerDown />
         </Divider>
 
-        <div>
+        <Box>
           <Image
             src="/img/charizard.png"
             alt="Charizard"
             width={488}
             height={528}
           />
-        </div>
+        </Box>
       </Container>
     </Wrapper>
   );
