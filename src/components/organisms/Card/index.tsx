@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { PokemonTypes } from 'types/pokemonTypes';
-// import { PokemonTypes } from 'types/pokemonTypes';
 import { Type } from '../../atoms/Type';
 import {
   Container,
@@ -19,7 +18,7 @@ export type CardProps = {
   number: string;
   name: string;
   types: PokemonTypes[];
-  weight: string;
+  weight: number;
   height: string;
   bgColor: string;
 };
@@ -37,9 +36,9 @@ export function Card({
     <Wrapper>
       <Blur bgColor={bgColor} />
 
-      <Image
+      <img
         className="pokemon"
-        src={src}
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${src}.png`}
         alt={name}
         width={256}
         height={256}

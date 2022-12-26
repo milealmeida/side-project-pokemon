@@ -8,7 +8,8 @@ export const Wrapper = styled.section`
 export const Container = styled.div`
   margin-inline: auto;
   display: flex;
-  gap: 3.2rem;
+  flex-wrap: wrap;
+  gap: 20rem 3.2rem;
   max-width: 144rem;
   justify-content: center;
   margin-top: 20rem;
