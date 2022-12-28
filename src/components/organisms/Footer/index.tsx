@@ -10,7 +10,7 @@ export function Footer() {
           <Text>Direitos de imagem para Nintendo & The Pokémon Company</Text>
           <Text>
             Dados pegos da API -{' '}
-            <Link href="https://pokeapi.co//" target="_blank">
+            <Link href="https://pokeapi.co/" target="_blank">
               pokeapi.co
             </Link>
           </Text>

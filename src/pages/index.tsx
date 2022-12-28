@@ -1,7 +1,12 @@
 import { gql } from '@apollo/client';
+import { SamplePokeApIqueryQueryResult } from 'generated/graphql';
 import { initializeApollo } from 'graphql/apollo-client';
 
 import { HomeTemplate } from 'Templates/Home';
+
+type HomeProps = {
+  pokemonsData: SamplePokeApIqueryQueryResult;
+};
 
 const GET_POKEMONS = gql`
   query samplePokeAPIquery {
@@ -20,20 +25,18 @@ const GET_POKEMONS = gql`
   }
 `;
 
-export default function Home({ data }: any) {
-  const pokemons = data;
-
-  return <HomeTemplate pokemons={pokemons} />;
+export default function Home({ pokemonsData }: HomeProps) {
+  return <HomeTemplate pokemons={pokemonsData} />;
 }
 
 export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
-  const { data } = await apolloClient.query({ query: GET_POKEMONS });
+  const pokemonsData = await apolloClient.query({ query: GET_POKEMONS });
 
   return {
     props: {
-      data,
+      pokemonsData,
       initialApolloState: apolloClient.cache.extract(),
     },
   };

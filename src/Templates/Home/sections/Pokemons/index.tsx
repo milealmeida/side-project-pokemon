@@ -1,34 +1,39 @@
 import { Card, SearchBar } from 'components';
+import { SamplePokeApIqueryQueryResult } from 'generated/graphql';
+import { PokemonTypes, PokemonV2Type } from 'types/pokemonTypes';
+import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Container, Wrapper } from './styles';
 
-type PokemonsProps = {
-  pokemons: any;
+export type PokemonsProps = {
+  pokemons: SamplePokeApIqueryQueryResult;
 };
 
 export function Pokemons({ pokemons }: PokemonsProps) {
-  console.log(
-    pokemons.pokemon_v2_pokemon.map(
-      (pokemon: any) => pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name,
-    ),
-  );
-
   return (
     <Wrapper>
       <SearchBar />
 
       <Container>
-        {pokemons.pokemon_v2_pokemon.slice(0, 9).map((pokemon: any) => (
-          <Card
-            key={pokemon.id}
-            bgColor="#1CD80E"
-            src={pokemon.id}
-            number={`#${pokemon.id}`}
-            name={pokemon.name}
-            types={['grass', 'poison']}
-            weight={pokemon.weight}
-            height={pokemon.height}
-          />
-        ))}
+        {!pokemons.loading &&
+          pokemons.data?.pokemon_v2_pokemon.slice(0, 9).map(pokemon => {
+            const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
+              .pokemon_v2_type?.name as PokemonTypes;
+
+            const { color } = getFormattedPokemonType(pokemonTypes);
+
+            return (
+              <Card
+                key={pokemon.id}
+                bgColor={color}
+                src={pokemon.id}
+                number={pokemon.id}
+                name={pokemon.name}
+                types={pokemon.pokemon_v2_pokemontypes as PokemonV2Type}
+                weight={pokemon.weight}
+                height={pokemon.height}
+              />
+            );
+          })}
       </Container>
     </Wrapper>
   );
