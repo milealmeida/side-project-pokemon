@@ -1,15 +1,15 @@
 import { gql } from '@apollo/client';
-import { SamplePokeApIqueryQueryResult } from 'generated/graphql';
+import { PokeApIqueryQueryResult } from 'generated/graphql';
 import { initializeApollo } from 'graphql/apollo-client';
 
 import { HomeTemplate } from 'Templates/Home';
 
 type HomeProps = {
-  pokemonsData: SamplePokeApIqueryQueryResult;
+  pokemonsData: PokeApIqueryQueryResult;
 };
 
 const GET_POKEMONS = gql`
-  query samplePokeAPIquery {
+  query pokeAPIquery {
     pokemon_v2_pokemon {
       name
       id

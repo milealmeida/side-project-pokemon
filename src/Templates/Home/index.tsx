@@ -1,6 +1,6 @@
 import { Footer } from 'components';
+import { PokemonsProps } from 'types';
 import { Hero, Pokemons } from './sections';
-import { PokemonsProps } from './sections/Pokemons';
 
 type HomeProps = Pick<PokemonsProps, 'pokemons'>;
 

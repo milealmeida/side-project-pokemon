@@ -1,12 +1,7 @@
 import { Card, SearchBar } from 'components';
-import { SamplePokeApIqueryQueryResult } from 'generated/graphql';
-import { PokemonTypes, PokemonV2Type } from 'types/pokemonTypes';
+import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Container, Wrapper } from './styles';
-
-export type PokemonsProps = {
-  pokemons: SamplePokeApIqueryQueryResult;
-};
 
 export function Pokemons({ pokemons }: PokemonsProps) {
   return (

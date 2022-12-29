@@ -51716,14 +51716,14 @@ export type Subscription_RootPokemon_V2_Versionname_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type SamplePokeApIqueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type PokeApIqueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SamplePokeApIqueryQuery = { __typename?: 'query_root', pokemon_v2_pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', name: string, id: number, weight?: number | null, height?: number | null, pokemon_v2_pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', pokemon_v2_type?: { __typename?: 'pokemon_v2_type', name: string, id: number } | null }> }> };
+export type PokeApIqueryQuery = { __typename?: 'query_root', pokemon_v2_pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', name: string, id: number, weight?: number | null, height?: number | null, pokemon_v2_pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', pokemon_v2_type?: { __typename?: 'pokemon_v2_type', name: string, id: number } | null }> }> };
 
 
-export const SamplePokeApIqueryDocument = gql`
-    query samplePokeAPIquery {
+export const PokeApIqueryDocument = gql`
+    query pokeAPIquery {
   pokemon_v2_pokemon {
     name
     id
@@ -51740,28 +51740,28 @@ export const SamplePokeApIqueryDocument = gql`
     `;
 
 /**
- * __useSamplePokeApIqueryQuery__
+ * __usePokeApIqueryQuery__
  *
- * To run a query within a React component, call `useSamplePokeApIqueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useSamplePokeApIqueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePokeApIqueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePokeApIqueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSamplePokeApIqueryQuery({
+ * const { data, loading, error } = usePokeApIqueryQuery({
  *   variables: {
  *   },
  * });
  */
-export function useSamplePokeApIqueryQuery(baseOptions?: Apollo.QueryHookOptions<SamplePokeApIqueryQuery, SamplePokeApIqueryQueryVariables>) {
+export function usePokeApIqueryQuery(baseOptions?: Apollo.QueryHookOptions<PokeApIqueryQuery, PokeApIqueryQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SamplePokeApIqueryQuery, SamplePokeApIqueryQueryVariables>(SamplePokeApIqueryDocument, options);
+        return Apollo.useQuery<PokeApIqueryQuery, PokeApIqueryQueryVariables>(PokeApIqueryDocument, options);
       }
-export function useSamplePokeApIqueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SamplePokeApIqueryQuery, SamplePokeApIqueryQueryVariables>) {
+export function usePokeApIqueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PokeApIqueryQuery, PokeApIqueryQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SamplePokeApIqueryQuery, SamplePokeApIqueryQueryVariables>(SamplePokeApIqueryDocument, options);
+          return Apollo.useLazyQuery<PokeApIqueryQuery, PokeApIqueryQueryVariables>(PokeApIqueryDocument, options);
         }
-export type SamplePokeApIqueryQueryHookResult = ReturnType<typeof useSamplePokeApIqueryQuery>;
-export type SamplePokeApIqueryLazyQueryHookResult = ReturnType<typeof useSamplePokeApIqueryLazyQuery>;
-export type SamplePokeApIqueryQueryResult = Apollo.QueryResult<SamplePokeApIqueryQuery, SamplePokeApIqueryQueryVariables>;
+export type PokeApIqueryQueryHookResult = ReturnType<typeof usePokeApIqueryQuery>;
+export type PokeApIqueryLazyQueryHookResult = ReturnType<typeof usePokeApIqueryLazyQuery>;
+export type PokeApIqueryQueryResult = Apollo.QueryResult<PokeApIqueryQuery, PokeApIqueryQueryVariables>;
