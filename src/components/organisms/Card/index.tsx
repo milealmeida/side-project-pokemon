@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PokemonTypes, PokemonV2Type } from 'types/pokemonTypes';
+import { PokemonTypes, PokemonV2Type } from 'types';
 import { Type } from '../../atoms/Type';
 import {
   Container,

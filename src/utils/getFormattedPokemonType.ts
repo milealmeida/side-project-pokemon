@@ -1,4 +1,4 @@
-import { PokemonTypes } from 'types/pokemonTypes';
+import { PokemonTypes } from 'types';
 
 export const getFormattedPokemonType = (type: PokemonTypes) => {
   const pokemonTypes = {

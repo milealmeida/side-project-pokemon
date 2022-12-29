@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PokemonTypes } from 'types/pokemonTypes';
+import { PokemonTypes } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Wrapper } from './styles';
 
