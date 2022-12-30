@@ -1,11 +1,14 @@
 import { Footer } from 'components';
+import { PokemonsProps } from 'types';
 import { Hero, Pokemons } from './sections';
 
-export function HomeTemplate() {
+type HomeProps = Pick<PokemonsProps, 'pokemons'>;
+
+export function HomeTemplate({ pokemons }: HomeProps) {
   return (
     <>
       <Hero />
-      <Pokemons />
+      <Pokemons pokemons={pokemons} />
       <Footer />
     </>
   );

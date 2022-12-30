@@ -1,99 +1,34 @@
 import { Card, SearchBar } from 'components';
+import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
+import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { Container, Wrapper } from './styles';
 
-export function Pokemons() {
+export function Pokemons({ pokemons }: PokemonsProps) {
   return (
     <Wrapper>
       <SearchBar />
 
       <Container>
-        <Card
-          bgColor="#1CD80E"
-          src="/img/bulbasaur.png"
-          number="#001"
-          name="Bulbasaur"
-          types={['grass', 'poison']}
-          weight="6.9"
-          height="0.7"
-        />
-        <Card
-          bgColor="#1CD80E"
-          src="/img/bulbasaur.png"
-          number="#001"
-          name="Bulbasaur"
-          types={['grass']}
-          weight="6.9"
-          height="0.7"
-        />
-        <Card
-          bgColor="#1CD80E"
-          src="/img/bulbasaur.png"
-          number="#001"
-          name="Bulbasaur"
-          types={['grass', 'poison']}
-          weight="6.9"
-          height="0.7"
-        />
-      </Container>
+        {!pokemons.loading &&
+          pokemons.data?.pokemon_v2_pokemon.slice(0, 9).map(pokemon => {
+            const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
+              .pokemon_v2_type?.name as PokemonTypes;
 
-      <Container>
-        <Card
-          bgColor="#ff9900"
-          src="/img/charmander.png"
-          number="#004"
-          name="Charmander"
-          types={['fire']}
-          weight="8.5"
-          height="0.6"
-        />
-        <Card
-          bgColor="#ff9900"
-          src="/img/charmander.png"
-          number="#004"
-          name="Charmander"
-          types={['fire', 'flying']}
-          weight="8.5"
-          height="0.6"
-        />
-        <Card
-          bgColor="#ff9900"
-          src="/img/charmander.png"
-          number="#004"
-          name="Charmander"
-          types={['fire']}
-          weight="8.5"
-          height="0.6"
-        />
-      </Container>
+            const { color } = getFormattedPokemonType(pokemonTypes);
 
-      <Container>
-        <Card
-          bgColor="#14A8FF"
-          src="/img/squirtle.png"
-          number="#007"
-          name="Squirtle"
-          types={['water', 'bug']}
-          weight="9"
-          height="0.5"
-        />
-        <Card
-          bgColor="#14A8FF"
-          src="/img/squirtle.png"
-          number="#007"
-          name="Squirtle"
-          types={['water']}
-          weight="9"
-          height="0.5"
-        />
-        <Card
-          bgColor="#14A8FF"
-          src="/img/squirtle.png"
-          number="#007"
-          name="Squirtle"
-          types={['water']}
-          weight="9"
-          height="0.5"
-        />
+            return (
+              <Card
+                key={pokemon.id}
+                bgColor={color}
+                src={pokemon.id}
+                number={pokemon.id}
+                name={pokemon.name}
+                types={pokemon.pokemon_v2_pokemontypes as PokemonV2Type}
+                weight={pokemon.weight}
+                height={pokemon.height}
+              />
+            );
+          })}
       </Container>
     </Wrapper>
   );

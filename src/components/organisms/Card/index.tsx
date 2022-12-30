@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { PokemonTypes } from 'types/pokemonTypes';
-// import { PokemonTypes } from 'types/pokemonTypes';
+import { PokemonTypes, PokemonV2Type } from 'types';
 import { Type } from '../../atoms/Type';
 import {
   Container,
@@ -15,12 +14,12 @@ import {
 } from './styles';
 
 export type CardProps = {
-  src: string;
-  number: string;
+  src: number;
+  number: number;
   name: string;
-  types: PokemonTypes[];
-  weight: string;
-  height: string;
+  types: PokemonV2Type;
+  weight: number | null | undefined;
+  height: number | null | undefined;
   bgColor: string;
 };
 
@@ -33,24 +32,32 @@ export function Card({
   height,
   bgColor,
 }: CardProps) {
+  const numberFormatted =
+    number ?? (parseInt(number, 10) + 1000).toString().slice(1);
+  const weightFormatted = weight && weight / 10;
+  const heightFormatted = height && height / 10;
+
   return (
     <Wrapper>
       <Blur bgColor={bgColor} />
 
       <Image
         className="pokemon"
-        src={src}
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${src}.png`}
         alt={name}
         width={256}
         height={256}
       />
       <Content>
-        <Number>{number}</Number>
+        <Number>#{numberFormatted}</Number>
         <Name>{name}</Name>
 
         <Types>
           {types.slice(0, 2).map(type => (
-            <Type type={type} />
+            <Type
+              key={type.pokemon_v2_type.id}
+              type={type.pokemon_v2_type.name as PokemonTypes}
+            />
           ))}
         </Types>
 
@@ -63,7 +70,7 @@ export function Card({
                 width={24}
                 height={24}
               />
-              {weight} kg
+              {weightFormatted} kg
             </strong>
             Peso
           </Info>
@@ -76,7 +83,7 @@ export function Card({
                 width={24}
                 height={24}
               />
-              {height} m
+              {heightFormatted} m
             </strong>
             Altura
           </Info>

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { PokemonTypes } from 'types';
 import { Type } from '../../atoms/Type';
 import {
   Box,
@@ -41,7 +42,7 @@ export function SearchBar() {
 
           <Types>
             {types.map(({ id, type }) => (
-              <Type key={id} type={type} />
+              <Type key={id} type={type as PokemonTypes} />
             ))}
           </Types>
 

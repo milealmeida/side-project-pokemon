@@ -57,6 +57,7 @@ export const Number = styled.span`
 `;
 
 export const Name = styled.h1`
+  text-transform: capitalize;
   font-weight: 700;
   font-size: 3.2rem;
   line-height: 4.3rem;
