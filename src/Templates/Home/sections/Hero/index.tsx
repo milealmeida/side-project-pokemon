@@ -50,6 +50,7 @@ export function Hero() {
 
         <Box>
           <Image
+            priority
             src="/img/charizard.png"
             alt="Charizard"
             width={488}
