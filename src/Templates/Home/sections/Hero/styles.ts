@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   position: relative;
+  padding-bottom: 10rem;
   background: linear-gradient(
     180deg,
     ${({ theme }) => theme.colors.orange[400]} 0%,

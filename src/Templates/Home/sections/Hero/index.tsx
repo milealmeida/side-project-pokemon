@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Header, Type, Button } from 'components';
+import { Header, Type, Button, Waves } from 'components';
 import {
   Wrapper,
   Container,
@@ -58,6 +58,7 @@ export function Hero() {
           />
         </Box>
       </Container>
+      <Waves />
     </Wrapper>
   );
 }

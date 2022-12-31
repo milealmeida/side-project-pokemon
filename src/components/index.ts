@@ -5,3 +5,4 @@ export { Footer } from './organisms/Footer';
 
 export { Type } from './atoms/Type';
 export { Button } from './atoms/Button';
+export { Waves } from './atoms/Waves';
