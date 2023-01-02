@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Ocean = styled.div`
   height: 5%;
-  width: 100%;
   position: absolute;
   bottom: -10rem;
   left: 0;
@@ -33,7 +32,7 @@ export const Wave = styled.div`
   }
 
   &:nth-of-type(4) {
-    top: 15rem;
+    top: -15rem;
     animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -2s infinite,
       swell 7s ease -1.25s infinite;
     opacity: 1;
