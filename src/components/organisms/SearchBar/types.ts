@@ -17,5 +17,5 @@ export const types = [
   { id: 16, type: 'ghost' },
   { id: 17, type: 'fighting' },
   { id: 18, type: 'fairy' },
-  { id: 12, type: 'shadow' },
+  { id: 19, type: 'shadow' },
 ] as const;
