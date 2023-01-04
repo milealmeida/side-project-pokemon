@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { render, RenderResult } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import theme from '../styles/theme';
+import theme from 'styles/theme';
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
