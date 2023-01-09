@@ -26,7 +26,11 @@ export function Footer() {
         </Content>
 
         <Links>
-          <Link href="https://www.linkedin.com/in/milealmeida/" target="_blank">
+          <Link
+            href="https://www.linkedin.com/in/milealmeida/"
+            target="_blank"
+            data-testid="linkedin"
+          >
             <Image
               src="/img/svg/linkedin.svg"
               alt="Logo LinkedIn"
@@ -34,7 +38,11 @@ export function Footer() {
               height={48}
             />
           </Link>
-          <Link href="https://github.com/milealmeida" target="_blank">
+          <Link
+            href="https://github.com/milealmeida"
+            target="_blank"
+            data-testid="github"
+          >
             <Image
               src="/img/svg/github.svg"
               alt="Logo Github"

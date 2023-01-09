@@ -5,7 +5,7 @@ import { Wrapper, Link } from './styles';
 export function Header() {
   return (
     <Wrapper>
-      <Link href="/">
+      <Link href="/" data-testid="logo">
         <Image
           src="/img/svg/logo-pokemon.svg"
           alt="Logo Pokémon"
@@ -15,7 +15,11 @@ export function Header() {
       </Link>
 
       <nav>
-        <Link href="https://www.linkedin.com/in/milealmeida/" target="_blank">
+        <Link
+          href="https://www.linkedin.com/in/milealmeida/"
+          target="_blank"
+          data-testid="linkedin"
+        >
           <Image
             src="/img/svg/linkedin.svg"
             alt="Logo LinkedIn"
@@ -23,7 +27,11 @@ export function Header() {
             height={48}
           />
         </Link>
-        <Link href="https://github.com/milealmeida" target="_blank">
+        <Link
+          href="https://github.com/milealmeida"
+          target="_blank"
+          data-testid="github"
+        >
           <Image
             src="/img/svg/github.svg"
             alt="Logo Github"
