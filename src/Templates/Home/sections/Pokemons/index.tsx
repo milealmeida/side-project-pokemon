@@ -10,7 +10,7 @@ export function Pokemons({ pokemons }: PokemonsProps) {
 
       <Container>
         {!pokemons.loading &&
-          pokemons.data?.pokemon_v2_pokemon.slice(0, 9).map(pokemon => {
+          pokemons.data?.pokemon_v2_pokemon.map(pokemon => {
             const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
               .pokemon_v2_type?.name as PokemonTypes;
 

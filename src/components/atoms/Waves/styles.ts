@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+  height: 30rem;
+  position: relative;
+  bottom: -1rem;
+`;
+
 export const Ocean = styled.div`
+  background: ${({ theme }) => theme.colors.blue[800]};
+  bottom: -1rem;
   height: 5%;
   position: absolute;
-  bottom: -10rem;
   left: 0;
-  background: ${({ theme }) => theme.colors.blue[800]};
 `;
 
 export const Wave = styled.div`
