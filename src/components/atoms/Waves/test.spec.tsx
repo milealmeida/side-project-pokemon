@@ -7,7 +7,7 @@ describe('Waves', () => {
   it('should be able to compare background color', () => {
     const { container } = renderWitheTheme(<Waves />);
 
-    const background = container.firstChild;
+    const background = container.firstChild?.firstChild;
     const bgColor = theme.colors.blue[800];
 
     expect(background).toHaveStyle(`background: ${bgColor}`);

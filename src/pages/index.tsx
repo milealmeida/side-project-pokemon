@@ -10,7 +10,7 @@ type HomeProps = {
 
 const GET_POKEMONS = gql`
   query pokeAPIquery {
-    pokemon_v2_pokemon {
+    pokemon_v2_pokemon(limit: 9, offset: 9) {
       name
       id
       weight
