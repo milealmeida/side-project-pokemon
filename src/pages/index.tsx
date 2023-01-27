@@ -8,9 +8,9 @@ type HomeProps = {
   pokemonsData: PokeApIqueryQueryResult;
 };
 
-const GET_POKEMONS = gql`
-  query pokeAPIquery {
-    pokemon_v2_pokemon(limit: 9, offset: 0) {
+export const GET_POKEMONS = gql`
+  query pokeAPIquery($limit: Int!, $offset: Int!) {
+    pokemon_v2_pokemon(limit: $limit, offset: $offset) {
       name
       id
       weight
@@ -32,7 +32,13 @@ export default function Home({ pokemonsData }: HomeProps) {
 export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
-  const pokemonsData = await apolloClient.query({ query: GET_POKEMONS });
+  const pokemonsData = await apolloClient.query({
+    query: GET_POKEMONS,
+    variables: {
+      limit: 9,
+      offset: 0,
+    },
+  });
 
   return {
     props: {
