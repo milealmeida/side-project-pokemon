@@ -1,6 +1,10 @@
 import Image from 'next/image';
+
 import { PokemonTypes } from 'types';
 import { Type } from '../../atoms/Type';
+import { InputComponent } from '../../atoms/Input';
+import { types } from './types';
+
 import {
   Box,
   Container,
@@ -12,9 +16,6 @@ import {
   Types,
   Wrapper,
 } from './styles';
-
-import { InputComponent } from '../../atoms/Input';
-import { types } from './types';
 
 export function SearchBar() {
   return (
@@ -55,6 +56,7 @@ export function SearchBar() {
             />
           </RightArrow>
         </Box>
+
         <InputComponent />
       </Container>
 
