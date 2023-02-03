@@ -1,29 +1,75 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable consistent-return */
+import { useContext, useEffect, useState } from 'react';
+
 import { Card, SearchBar } from 'components';
 import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
-import { useState } from 'react';
+
 import { GET_POKEMONS } from 'pages';
+
 import { createApolloClient } from 'graphql/apollo-client';
+import { PokeApIqueryQueryResult } from 'generated/graphql';
+import { DOTS, usePagination } from 'hooks/usePagination';
+import { v4 as uuidv4 } from 'uuid';
+import { PokemonContext } from 'context/pokemonsContext';
 import { Container, Wrapper } from './styles';
 
 const PAGE_SIZE = 9;
 
+export type PokemonDataProps = {
+  data: {
+    pokemon_v2_pokemon: {
+      weight: number;
+      height: number;
+      id: number;
+      name: string;
+      pokemon_v2_pokemontypes: {
+        pokemon_v2_type: {
+          id: number;
+          name: string;
+        };
+      }[];
+    }[];
+  };
+  loading: boolean;
+};
+
 export function Pokemons({ pokemons }: PokemonsProps) {
   const [page, setPage] = useState(0);
-  const [renderPokemons, setRenderPokemons] = useState<any>(pokemons);
+  const [renderPokemons, setRenderPokemons] = useState<
+    PokemonDataProps | PokeApIqueryQueryResult
+  >(pokemons);
+
+  const { pokemons: pokemonCtx, dispatch } = useContext(PokemonContext);
+
+  const loading = renderPokemons?.loading;
+  const data = renderPokemons.data?.pokemon_v2_pokemon;
 
   const apolloClient = createApolloClient();
 
-  async function handlePage(teste: number) {
+  const totalCount = 128 * 9;
+
+  const paginationRange = usePagination({
+    totalCount,
+    currentPage: page,
+  });
+
+  async function handlePage(pagePosition: number) {
     const response = await apolloClient.query({
       query: GET_POKEMONS,
       variables: {
         limit: PAGE_SIZE,
-        offset: teste * PAGE_SIZE,
+        offset: pagePosition * PAGE_SIZE,
       },
     });
 
-    setRenderPokemons(response);
+    // setRenderPokemons(response);
+
+    dispatch({
+      type: 'SET_POKEMONS',
+      payload: response,
+    });
   }
 
   function prevPage() {
@@ -48,6 +94,21 @@ export function Pokemons({ pokemons }: PokemonsProps) {
     }
   }
 
+  function handleSetPage(pageTeste: any) {
+    setPage(() => {
+      handlePage(pageTeste);
+
+      return pageTeste;
+    });
+  }
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_POKEMONS',
+      payload: pokemons,
+    });
+  }, [dispatch, pokemons]);
+
   return (
     <Wrapper>
       <SearchBar />
@@ -55,14 +116,59 @@ export function Pokemons({ pokemons }: PokemonsProps) {
       <button type="button" disabled={!page} onClick={prevPage}>
         Prev
       </button>
-      <span style={{ color: 'white' }}>Page {page + 1}</span>
-      <button type="button" disabled={!page} onClick={nextPage}>
+
+      {paginationRange &&
+        paginationRange.map((pageNumber: any) => {
+          if (pageNumber === DOTS) {
+            return (
+              <button key={uuidv4()} type="button">
+                {pageNumber}
+              </button>
+            );
+          }
+
+          return (
+            <button
+              key={pageNumber + 1}
+              type="button"
+              onClick={() => {
+                handleSetPage(pageNumber);
+              }}
+            >
+              {pageNumber}
+            </button>
+          );
+        })}
+
+      <button type="button" disabled={page > 127} onClick={nextPage}>
         Next
       </button>
 
+      {/* <Container>
+        {!loading &&
+          data?.map(pokemon => {
+            const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
+              .pokemon_v2_type?.name as PokemonTypes;
+
+            const { color } = getFormattedPokemonType(pokemonTypes);
+
+            return (
+              <Card
+                key={pokemon.id}
+                bgColor={color}
+                src={pokemon.id}
+                number={pokemon.id}
+                name={pokemon.name}
+                types={pokemon.pokemon_v2_pokemontypes as PokemonV2Type}
+                weight={pokemon.weight}
+                height={pokemon.height}
+              />
+            );
+          })}
+      </Container> */}
       <Container>
-        {renderPokemons.loading === false &&
-          renderPokemons?.data.pokemon_v2_pokemon.map((pokemon: any) => {
+        {!loading &&
+          pokemonCtx?.data?.pokemon_v2_pokemon?.map(pokemon => {
             const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
               .pokemon_v2_type?.name as PokemonTypes;
 
