@@ -1,8 +1,9 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import Image from 'next/image';
 import { gql } from '@apollo/client';
 import { createApolloClient } from 'graphql/apollo-client';
 
+import { PokemonContext } from 'context/pokemonsContext';
 import { Container, Input, Wrapper } from './styles';
 
 export const GET_POKEMONS = gql`
@@ -27,6 +28,8 @@ export function InputComponent() {
 
   const apolloClient = createApolloClient();
 
+  const { dispatch } = useContext(PokemonContext);
+
   async function handlePokemonName(name: string) {
     const response = await apolloClient.query({
       query: GET_POKEMONS,
@@ -35,7 +38,10 @@ export function InputComponent() {
       },
     });
 
-    console.log(response);
+    dispatch({
+      type: 'SET_POKEMONS',
+      payload: response,
+    });
   }
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

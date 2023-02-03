@@ -5,6 +5,8 @@ import { createApolloClient } from 'graphql/apollo-client';
 import { PokemonTypes } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 
+import { useContext } from 'react';
+import { PokemonContext } from 'context/pokemonsContext';
 import { Wrapper } from './styles';
 
 type TypeProps = {
@@ -39,7 +41,9 @@ export function Type({ type }: TypeProps) {
 
   const apolloClient = createApolloClient();
 
-  async function handlePokemonType(pokemonType: string) {
+  const { dispatch } = useContext(PokemonContext);
+
+  const handlePokemonType = async (pokemonType: string) => {
     const response = await apolloClient.query({
       query: GET_POKEMONS,
       variables: {
@@ -49,8 +53,11 @@ export function Type({ type }: TypeProps) {
       },
     });
 
-    console.log(response);
-  }
+    dispatch({
+      type: 'SET_POKEMONS',
+      payload: response,
+    });
+  };
 
   const handleClick = () => {
     const typePokemon = name.charAt(0).toLowerCase() + name.slice(1);
