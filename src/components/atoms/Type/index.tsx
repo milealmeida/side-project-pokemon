@@ -4,9 +4,8 @@ import { createApolloClient } from 'graphql/apollo-client';
 
 import { PokemonTypes } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
+import { usePokemon } from 'context/pokemonsContext';
 
-import { useContext } from 'react';
-import { PokemonContext } from 'context/pokemonsContext';
 import { Wrapper } from './styles';
 
 type TypeProps = {
@@ -41,7 +40,7 @@ export function Type({ type }: TypeProps) {
 
   const apolloClient = createApolloClient();
 
-  const { dispatch } = useContext(PokemonContext);
+  const { dispatch } = usePokemon();
 
   const handlePokemonType = async (pokemonType: string) => {
     const response = await apolloClient.query({

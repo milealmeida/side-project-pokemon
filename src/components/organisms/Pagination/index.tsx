@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { DOTS, usePagination } from 'hooks/usePagination';
 
-import { useContext, useEffect, useState } from 'react';
-import { PokemonContext } from 'context/pokemonsContext';
+import { useEffect, useState } from 'react';
 import { createApolloClient } from 'graphql/apollo-client';
 import { GET_POKEMONS } from 'pages';
 import { PokemonsProps } from 'types';
+import { usePokemon } from 'context/pokemonsContext';
 import { Button, Wrapper } from './styles';
 
 const PAGE_SIZE = 9;
@@ -22,9 +22,7 @@ export function Pagination({ pokemons }: PokemonsProps) {
     currentPage: page,
   });
 
-  console.log('page', page);
-
-  const { dispatch } = useContext(PokemonContext);
+  const { dispatch } = usePokemon();
 
   const apolloClient = createApolloClient();
 

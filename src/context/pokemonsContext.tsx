@@ -1,27 +1,49 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { PokeApIqueryQueryResult } from 'generated/graphql';
 import {
   createContext,
-  useState,
-  useEffect,
   useReducer,
-  Dispatch,
   ReactNode,
+  useContext,
+  Dispatch,
+  useMemo,
 } from 'react';
 
-interface API {
-  pokemons: PokeApIqueryQueryResult | null;
-  dispatch: any;
-}
+import { PokeApIqueryQueryResult } from 'generated/graphql';
 
-interface APIProviderProps {
+type PokemonDataProps = {
+  data: {
+    pokemon_v2_pokemon: {
+      weight: number;
+      height: number;
+      id: number;
+      name: string;
+      pokemon_v2_pokemontypes: {
+        pokemon_v2_type: {
+          id: number;
+          name: string;
+        };
+      }[];
+    }[];
+  };
+  loading: boolean;
+};
+
+type ActionType = {
+  type: string;
+  payload: PokeApIqueryQueryResult | PokemonDataProps;
+};
+
+type ContextPokemon = {
+  pokemons: PokeApIqueryQueryResult | PokemonDataProps | null;
+  dispatch: Dispatch<ActionType>;
+};
+
+type PokemonProviderProps = {
   children: ReactNode;
-}
+};
 
 const pokemonsReducer = (
-  state: PokeApIqueryQueryResult | null,
-  action: { type: string; payload: PokeApIqueryQueryResult },
+  state: PokeApIqueryQueryResult | PokemonDataProps | null,
+  action: ActionType,
 ) => {
   switch (action.type) {
     case 'SET_POKEMONS':
@@ -31,19 +53,27 @@ const pokemonsReducer = (
   }
 };
 
-export const PokemonContext = createContext<API>({
+const PokemonContext = createContext<ContextPokemon>({
   pokemons: null,
-  dispatch: () => {},
+  dispatch: () => null,
 });
 
-function PokemonProvider({ children }: APIProviderProps) {
+export function PokemonProvider({ children }: PokemonProviderProps) {
   const [pokemons, dispatchPokemons] = useReducer(pokemonsReducer, null);
 
+  const result = useMemo(
+    () => ({ pokemons, dispatch: dispatchPokemons }),
+    [pokemons],
+  );
+
   return (
-    <PokemonContext.Provider value={{ pokemons, dispatch: dispatchPokemons }}>
-      {children}
-    </PokemonContext.Provider>
+    <PokemonContext.Provider value={result}>{children}</PokemonContext.Provider>
   );
 }
 
-export default PokemonProvider;
+export function usePokemon() {
+  const { pokemons: pokemonCtx, dispatch } =
+    useContext<ContextPokemon>(PokemonContext);
+
+  return { pokemonCtx, dispatch };
+}

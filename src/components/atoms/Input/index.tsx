@@ -1,9 +1,10 @@
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import { gql } from '@apollo/client';
 import { createApolloClient } from 'graphql/apollo-client';
 
-import { PokemonContext } from 'context/pokemonsContext';
+import { usePokemon } from 'context/pokemonsContext';
+
 import { Container, Input, Wrapper } from './styles';
 
 export const GET_POKEMONS = gql`
@@ -28,7 +29,7 @@ export function InputComponent() {
 
   const apolloClient = createApolloClient();
 
-  const { dispatch } = useContext(PokemonContext);
+  const { dispatch } = usePokemon();
 
   async function handlePokemonName(name: string) {
     const response = await apolloClient.query({
@@ -50,14 +51,17 @@ export function InputComponent() {
     setValue(newValue);
   };
 
-  if (value && value?.length > 2) {
-    handlePokemonName(value);
-  }
+  const handleClick = () => {
+    if (value) {
+      handlePokemonName(value);
+    }
+  };
 
   return (
     <Wrapper>
       <Input placeholder="Pesquisar Pokémon" type="text" onChange={onChange} />
-      <Container>
+
+      <Container onClick={handleClick}>
         <Image
           src="/img/svg/search.svg"
           alt="Ícone de uma lupa"

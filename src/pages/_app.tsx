@@ -7,7 +7,7 @@ import { useApollo } from 'graphql/apollo-client';
 
 import GlobalStyle from 'styles/global';
 import theme from 'styles/theme';
-import PokemonProvider from 'context/pokemonsContext';
+import { PokemonProvider } from 'context/pokemonsContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState);

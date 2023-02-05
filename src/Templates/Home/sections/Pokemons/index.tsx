@@ -1,39 +1,14 @@
-import { useContext, useState } from 'react';
-
 import { Card, Pagination, SearchBar } from 'components';
 import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
+import { usePokemon } from 'context/pokemonsContext';
 
-import { PokeApIqueryQueryResult } from 'generated/graphql';
-import { PokemonContext } from 'context/pokemonsContext';
 import { Container, Wrapper } from './styles';
 
-export type PokemonDataProps = {
-  data: {
-    pokemon_v2_pokemon: {
-      weight: number;
-      height: number;
-      id: number;
-      name: string;
-      pokemon_v2_pokemontypes: {
-        pokemon_v2_type: {
-          id: number;
-          name: string;
-        };
-      }[];
-    }[];
-  };
-  loading: boolean;
-};
-
 export function Pokemons({ pokemons }: PokemonsProps) {
-  const [renderPokemons, setRenderPokemons] = useState<
-    PokemonDataProps | PokeApIqueryQueryResult
-  >(pokemons);
+  const { pokemonCtx } = usePokemon();
 
-  const { pokemons: pokemonCtx } = useContext(PokemonContext);
-
-  const loading = renderPokemons?.loading;
+  const loading = pokemonCtx?.loading;
   const data = pokemonCtx?.data?.pokemon_v2_pokemon;
 
   return (
