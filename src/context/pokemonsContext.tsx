@@ -71,9 +71,9 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
   );
 }
 
-export function usePokemon() {
+export const usePokemon = () => {
   const { pokemons: pokemonCtx, dispatch } =
     useContext<ContextPokemon>(PokemonContext);
 
   return { pokemonCtx, dispatch };
-}
+};

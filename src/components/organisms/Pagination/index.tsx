@@ -1,13 +1,12 @@
-/* eslint-disable react/jsx-no-bind */
+import { useEffect, useState } from 'react';
+import { createApolloClient } from 'graphql/apollo-client';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DOTS, usePagination } from 'hooks/usePagination';
-
-import { useEffect, useState } from 'react';
-import { createApolloClient } from 'graphql/apollo-client';
 import { GET_POKEMONS } from 'pages';
 import { PokemonsProps } from 'types';
 import { usePokemon } from 'context/pokemonsContext';
+
 import { Button, Wrapper } from './styles';
 
 const PAGE_SIZE = 9;
@@ -26,7 +25,7 @@ export function Pagination({ pokemons }: PokemonsProps) {
 
   const apolloClient = createApolloClient();
 
-  async function handlePage(pagePosition: number) {
+  const handlePage = async (pagePosition: number) => {
     const response = await apolloClient.query({
       query: GET_POKEMONS,
       variables: {
@@ -39,9 +38,9 @@ export function Pagination({ pokemons }: PokemonsProps) {
       type: 'SET_POKEMONS',
       payload: response,
     });
-  }
+  };
 
-  function prevPage() {
+  const prevPage = () => {
     if (page > 0) {
       setPage(prevState => {
         const newPage = prevState - 1;
@@ -50,9 +49,9 @@ export function Pagination({ pokemons }: PokemonsProps) {
         return newPage;
       });
     }
-  }
+  };
 
-  function nextPage() {
+  const nextPage = () => {
     if (page < 129) {
       setPage(prevState => {
         const newPage = prevState + 1;
@@ -61,15 +60,15 @@ export function Pagination({ pokemons }: PokemonsProps) {
         return newPage;
       });
     }
-  }
+  };
 
-  function handleSetPage(pageTeste: any) {
+  const handleSetPage = (setPageNumber: number) => {
     setPage(() => {
-      handlePage(pageTeste);
+      handlePage(setPageNumber);
 
-      return pageTeste;
+      return setPageNumber;
     });
-  }
+  };
 
   useEffect(() => {
     dispatch({
@@ -85,7 +84,7 @@ export function Pagination({ pokemons }: PokemonsProps) {
       </Button>
 
       {paginationRange &&
-        paginationRange.map((pageNumber: any) => {
+        paginationRange.map((pageNumber: number | string) => {
           if (pageNumber === DOTS) {
             return <Button key={uuidv4()}>{pageNumber}</Button>;
           }
@@ -93,9 +92,11 @@ export function Pagination({ pokemons }: PokemonsProps) {
           return (
             <Button
               className={pageNumber === page ? 'selected' : ''}
-              key={pageNumber + 1}
+              key={uuidv4()}
               onClick={() => {
-                handleSetPage(pageNumber);
+                if (typeof pageNumber === 'number') {
+                  handleSetPage(pageNumber);
+                }
               }}
             >
               {pageNumber}

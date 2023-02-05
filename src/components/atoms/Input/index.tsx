@@ -31,7 +31,7 @@ export function InputComponent() {
 
   const { dispatch } = usePokemon();
 
-  async function handlePokemonName(name: string) {
+  const handlePokemonName = async (name: string) => {
     const response = await apolloClient.query({
       query: GET_POKEMONS,
       variables: {
@@ -43,7 +43,7 @@ export function InputComponent() {
       type: 'SET_POKEMONS',
       payload: response,
     });
-  }
+  };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
