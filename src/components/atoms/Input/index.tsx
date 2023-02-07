@@ -1,28 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
-import { gql } from '@apollo/client';
 import { createApolloClient } from 'graphql/apollo-client';
 
 import { usePokemon } from 'context/pokemonsContext';
+import { GET_POKEMONS_BY_NAME } from 'queries';
 
 import { Container, Input, Wrapper } from './styles';
-
-export const GET_POKEMONS = gql`
-  query pokeAPIquery($name: String!) {
-    pokemon_v2_pokemon(where: { name: { _like: $name } }) {
-      name
-      id
-      weight
-      height
-      pokemon_v2_pokemontypes {
-        pokemon_v2_type {
-          name
-          id
-        }
-      }
-    }
-  }
-`;
 
 export function InputComponent() {
   const [value, setValue] = useState<string>();
@@ -33,7 +16,7 @@ export function InputComponent() {
 
   const handlePokemonName = async (name: string) => {
     const response = await apolloClient.query({
-      query: GET_POKEMONS,
+      query: GET_POKEMONS_BY_NAME,
       variables: {
         name: `%${name}%`,
       },

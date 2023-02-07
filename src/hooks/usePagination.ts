@@ -1,3 +1,4 @@
+import { PAGE_SIZE } from 'queries';
 import { useMemo } from 'react';
 
 export const DOTS = '...';
@@ -14,7 +15,7 @@ const range = (start: number, end: number) => {
 
 export const usePagination = ({ totalCount, currentPage }: Props) => {
   const paginationRange = useMemo(() => {
-    const totalPageCount = Math.ceil(totalCount / 9);
+    const totalPageCount = Math.ceil(totalCount / PAGE_SIZE);
 
     const totalPageNumbers = 1 + 5;
     if (totalPageNumbers >= totalPageCount) {

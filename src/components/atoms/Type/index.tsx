@@ -1,39 +1,16 @@
 import Image from 'next/image';
-import { gql } from '@apollo/client';
 import { createApolloClient } from 'graphql/apollo-client';
 
 import { PokemonTypes } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { usePokemon } from 'context/pokemonsContext';
+import { GET_POKEMONS_BY_TYPE, PAGE_SIZE } from 'queries';
 
 import { Wrapper } from './styles';
 
 type TypeProps = {
   type: PokemonTypes;
 };
-
-export const GET_POKEMONS = gql`
-  query pokeAPIquery($type: String!, $limit: Int!, $offset: Int!) {
-    pokemon_v2_pokemon(
-      where: {
-        pokemon_v2_pokemontypes: { pokemon_v2_type: { name: { _like: $type } } }
-      }
-      limit: $limit
-      offset: $offset
-    ) {
-      name
-      id
-      weight
-      height
-      pokemon_v2_pokemontypes {
-        pokemon_v2_type {
-          name
-          id
-        }
-      }
-    }
-  }
-`;
 
 export function Type({ type }: TypeProps) {
   const { color, src, alt, name } = getFormattedPokemonType(type);
@@ -44,11 +21,11 @@ export function Type({ type }: TypeProps) {
 
   const handlePokemonType = async (pokemonType: string) => {
     const response = await apolloClient.query({
-      query: GET_POKEMONS,
+      query: GET_POKEMONS_BY_TYPE,
       variables: {
         type: pokemonType,
-        limit: 9,
-        offset: 9,
+        limit: PAGE_SIZE,
+        offset: PAGE_SIZE,
       },
     });
 

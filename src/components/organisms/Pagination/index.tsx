@@ -3,18 +3,16 @@ import { createApolloClient } from 'graphql/apollo-client';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DOTS, usePagination } from 'hooks/usePagination';
-import { GET_POKEMONS } from 'pages';
 import { PokemonsProps } from 'types';
 import { usePokemon } from 'context/pokemonsContext';
 
+import { GET_POKEMONS, PAGE_SIZE } from 'queries';
 import { Button, Wrapper } from './styles';
-
-const PAGE_SIZE = 9;
 
 export function Pagination({ pokemons }: PokemonsProps) {
   const [page, setPage] = useState(0);
 
-  const totalCount = 128 * 9;
+  const totalCount = 128 * PAGE_SIZE;
 
   const paginationRange = usePagination({
     totalCount,

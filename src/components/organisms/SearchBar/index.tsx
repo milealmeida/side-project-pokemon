@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { PokemonTypes } from 'types';
 import { usePokemon } from 'context/pokemonsContext';
 import { createApolloClient } from 'graphql/apollo-client';
-import { GET_POKEMONS } from 'pages';
+import { GET_POKEMONS, PAGE_SIZE } from 'queries';
 import { Type } from '../../atoms/Type';
 import { InputComponent } from '../../atoms/Input';
 import { types } from './types';
@@ -29,7 +29,7 @@ export function SearchBar() {
     const pokemonsData = await apolloClient.query({
       query: GET_POKEMONS,
       variables: {
-        limit: 9,
+        limit: PAGE_SIZE,
         offset: 0,
       },
     });
