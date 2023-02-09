@@ -37,11 +37,11 @@ export const getFormattedPokemonType = (type: PokemonTypes) => {
       name: 'Dragon',
     },
 
-    eletric: {
+    electric: {
       color: '#FFDE00',
-      src: '/img/svg/eletric.svg',
+      src: '/img/svg/electric.svg',
       alt: 'Ícone de raio',
-      name: 'Eletric',
+      name: 'Electric',
     },
 
     grass: {
@@ -105,13 +105,6 @@ export const getFormattedPokemonType = (type: PokemonTypes) => {
       src: '/img/svg/steel.svg',
       alt: 'Ícone de uma porca',
       name: 'Steel',
-    },
-
-    electric: {
-      color: '#ffde00',
-      src: '/img/svg/electric.svg',
-      alt: 'Ícone de raio',
-      name: 'Electric',
     },
 
     psychic: {

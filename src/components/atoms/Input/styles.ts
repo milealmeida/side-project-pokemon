@@ -32,6 +32,12 @@ export const Input = styled.input`
 `;
 
 export const Container = styled.div`
+  cursor: pointer;
   background-color: ${({ theme }) => theme.colors.blue[100]};
   padding: 1.2rem;
+  transition: opacity 300ms;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;

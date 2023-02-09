@@ -1,25 +1,48 @@
 import Image from 'next/image';
+
 import { PokemonTypes } from 'types';
+import { usePokemon } from 'context/pokemonsContext';
+import { createApolloClient } from 'graphql/apollo-client';
+import { GET_POKEMONS, PAGE_SIZE } from 'queries';
 import { Type } from '../../atoms/Type';
+import { InputComponent } from '../../atoms/Input';
+import { types } from './types';
+
 import {
   Box,
   Container,
   Divider,
   LeftArrow,
-  Link,
+  Home,
   RightArrow,
   Title,
   Types,
   Wrapper,
 } from './styles';
 
-import { InputComponent } from '../../atoms/Input';
-import { types } from './types';
-
 export function SearchBar() {
+  const { dispatch } = usePokemon();
+
+  const apolloClient = createApolloClient();
+
+  const handlePage = async () => {
+    const pokemonsData = await apolloClient.query({
+      query: GET_POKEMONS,
+      variables: {
+        limit: PAGE_SIZE,
+        offset: 0,
+      },
+    });
+
+    dispatch({
+      type: 'SET_POKEMONS',
+      payload: pokemonsData,
+    });
+  };
+
   return (
     <Wrapper>
-      <Link href="/">
+      <Home onClick={handlePage}>
         <Image
           src="/img/svg/home.svg"
           alt="Ícone de uma casa"
@@ -27,7 +50,7 @@ export function SearchBar() {
           height={24}
         />
         Início
-      </Link>
+      </Home>
       <Title>Pesquisar por tipos</Title>
       <Container>
         <Box>
@@ -55,6 +78,7 @@ export function SearchBar() {
             />
           </RightArrow>
         </Box>
+
         <InputComponent />
       </Container>
 

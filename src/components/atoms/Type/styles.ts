@@ -5,6 +5,7 @@ type WrapperProps = {
 };
 
 export const Wrapper = styled.div<WrapperProps>`
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -16,4 +17,9 @@ export const Wrapper = styled.div<WrapperProps>`
   font-weight: 400;
   width: fit-content;
   color: ${({ theme }) => theme.colors.white};
+  transition: opacity 300ms;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;

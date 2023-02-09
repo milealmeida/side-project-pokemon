@@ -8,7 +8,7 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-function createApolloClient() {
+export function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({ uri: 'https://beta.pokeapi.co/graphql/v1beta' }),

@@ -14,7 +14,8 @@ export const Divider = styled.div`
   background: ${({ theme }) => theme.colors.blue[600]};
 `;
 
-export const Link = styled.a`
+export const Home = styled.button`
+  cursor: pointer;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 2.4rem;
@@ -33,6 +34,12 @@ export const Link = styled.a`
   padding: 1.2rem 1.6rem;
   width: fit-content;
   align-items: center;
+
+  transition: opacity 300ms;
+
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 export const Container = styled.div`

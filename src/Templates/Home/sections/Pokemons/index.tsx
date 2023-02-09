@@ -1,16 +1,23 @@
-import { Card, SearchBar } from 'components';
+import { Card, Pagination, SearchBar } from 'components';
 import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
+import { usePokemon } from 'context/pokemonsContext';
+
 import { Container, Wrapper } from './styles';
 
 export function Pokemons({ pokemons }: PokemonsProps) {
+  const { pokemonCtx } = usePokemon();
+
+  const loading = pokemonCtx?.loading;
+  const data = pokemonCtx?.data?.pokemon_v2_pokemon;
+
   return (
     <Wrapper>
       <SearchBar />
 
       <Container>
-        {!pokemons.loading &&
-          pokemons.data?.pokemon_v2_pokemon.map(pokemon => {
+        {!loading &&
+          data?.map(pokemon => {
             const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
               .pokemon_v2_type?.name as PokemonTypes;
 
@@ -30,6 +37,8 @@ export function Pokemons({ pokemons }: PokemonsProps) {
             );
           })}
       </Container>
+
+      <Pagination pokemons={pokemons} />
     </Wrapper>
   );
 }
