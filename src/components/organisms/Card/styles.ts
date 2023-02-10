@@ -13,6 +13,12 @@ export const Wrapper = styled.div`
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
 
+  .who {
+    position: absolute;
+    top: -12rem;
+    right: 8rem;
+  }
+
   .pokemon {
     position: absolute;
     top: -17.2rem;
