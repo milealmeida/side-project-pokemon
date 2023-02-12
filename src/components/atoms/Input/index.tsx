@@ -34,6 +34,17 @@ export function InputComponent() {
     setValue(newValue);
   };
 
+  const handleKeyPress = (event: any) => {
+    if (event.key === 'Enter') {
+      const newValue = event.target.value;
+      setValue(newValue);
+
+      if (value) {
+        handlePokemonName(value);
+      }
+    }
+  };
+
   const handleClick = () => {
     if (value) {
       handlePokemonName(value);
@@ -42,7 +53,12 @@ export function InputComponent() {
 
   return (
     <Wrapper>
-      <Input placeholder="Pesquisar Pokémon" type="text" onChange={onChange} />
+      <Input
+        placeholder="Pesquisar Pokémon"
+        type="text"
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+      />
 
       <Container onClick={handleClick}>
         <Image

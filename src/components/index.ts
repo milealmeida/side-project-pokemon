@@ -7,3 +7,4 @@ export { Pagination } from './organisms/Pagination';
 export { Type } from './atoms/Type';
 export { Button } from './atoms/Button';
 export { Waves } from './atoms/Waves';
+export { Loading } from './atoms/Loading';

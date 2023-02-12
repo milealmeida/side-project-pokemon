@@ -1,4 +1,4 @@
-import { Card, Pagination, SearchBar } from 'components';
+import { Card, Pagination, SearchBar, Loading } from 'components';
 import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { usePokemon } from 'context/pokemonsContext';
@@ -16,7 +16,9 @@ export function Pokemons({ pokemons }: PokemonsProps) {
       <SearchBar />
 
       <Container>
-        {!loading &&
+        {loading ? (
+          <Loading />
+        ) : (
           data?.map(pokemon => {
             const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
               .pokemon_v2_type?.name as PokemonTypes;
@@ -35,7 +37,8 @@ export function Pokemons({ pokemons }: PokemonsProps) {
                 height={pokemon.height}
               />
             );
-          })}
+          })
+        )}
       </Container>
 
       <Pagination pokemons={pokemons} />
