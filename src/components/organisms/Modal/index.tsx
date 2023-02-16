@@ -1,49 +1,68 @@
 import { Type } from 'components/atoms/Type';
 import Image from 'next/image';
-import { Container, Wrapper } from './styles';
+import {
+  Box,
+  Card,
+  Container,
+  Content,
+  Img,
+  Info,
+  Number,
+  Title,
+  Types,
+  Wrapper,
+} from './styles';
 
 export function Modal() {
   return (
     <Wrapper>
       <Container>
-        <div>
-          <Image
-            src="/img/charizard.png"
-            alt="Charizard"
-            width={200}
-            height={400}
-          />
+        <Card>
+          <Img>
+            <Image
+              src="/img/charizard.png"
+              alt="Charizard"
+              fill
+              style={{ objectFit: 'contain' }}
+            />
+          </Img>
 
-          <span>#006</span>
-          <h1>Charizard</h1>
+          <Number>#006</Number>
+          <Title>Charizard</Title>
 
-          <div>
+          <Types>
             <Type type="flying" />
             <Type type="fire" />
-          </div>
+          </Types>
 
-          <div>
-            <Image
-              src="/img/svg/weight.svg"
-              alt="Balança"
-              width={10}
-              height={10}
-            />
-            <div>90.5 kg</div>
-            <span>Peso</span>
-          </div>
+          <Info>
+            <Box>
+              <Content>
+                <Image
+                  src="/img/svg/weight.svg"
+                  alt="Balança"
+                  width={20}
+                  height={20}
+                />
+                90.5 kg
+              </Content>
+              <p>Peso</p>
+            </Box>
 
-          <div>
-            <Image
-              src="/img/svg/height.svg"
-              alt="Balança"
-              width={10}
-              height={10}
-            />
-            <div>1.7 m</div>
-            <span>Altura</span>
-          </div>
-        </div>
+            <Box>
+              <Content>
+                <Image
+                  src="/img/svg/ruler.svg"
+                  alt="Balança"
+                  width={20}
+                  height={20}
+                />
+                1.7 m
+              </Content>
+              <p>Altura</p>
+            </Box>
+          </Info>
+        </Card>
 
         <div>
           <div>
