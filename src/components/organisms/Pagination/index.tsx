@@ -24,18 +24,27 @@ export function Pagination({ pokemons }: PokemonsProps) {
   const apolloClient = createApolloClient();
 
   const handlePage = async (pagePosition: number) => {
-    const response = await apolloClient.query({
-      query: GET_POKEMONS,
-      variables: {
-        limit: PAGE_SIZE,
-        offset: pagePosition * PAGE_SIZE,
-      },
-    });
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      });
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: response,
-    });
+      const response = await apolloClient.query({
+        query: GET_POKEMONS,
+        variables: {
+          limit: PAGE_SIZE,
+          offset: pagePosition * PAGE_SIZE,
+        },
+      });
+
+      dispatch({
+        type: 'SET_POKEMONS',
+        payload: response,
+      });
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
   };
 
   const prevPage = () => {
@@ -69,6 +78,11 @@ export function Pagination({ pokemons }: PokemonsProps) {
   };
 
   useEffect(() => {
+    dispatch({
+      type: 'SET_LOADING',
+      payload: true,
+    });
+
     dispatch({
       type: 'SET_POKEMONS',
       payload: pokemons,

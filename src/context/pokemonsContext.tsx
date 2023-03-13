@@ -29,12 +29,14 @@ type PokemonDataProps = {
 
 type ActionType = {
   type: string;
-  payload: PokeApIqueryQueryResult | PokemonDataProps;
+  // payload: PokeApIqueryQueryResult | PokemonDataProps | boolean;
+  payload: any;
 };
 
 type ContextPokemon = {
   pokemons: PokeApIqueryQueryResult | PokemonDataProps | null;
   dispatch: Dispatch<ActionType>;
+  loading?: boolean;
 };
 
 type PokemonProviderProps = {
@@ -48,6 +50,8 @@ const pokemonsReducer = (
   switch (action.type) {
     case 'SET_POKEMONS':
       return action.payload;
+    case 'SET_LOADING':
+      return action.payload;
     default:
       return state;
   }
@@ -56,13 +60,18 @@ const pokemonsReducer = (
 const PokemonContext = createContext<ContextPokemon>({
   pokemons: null,
   dispatch: () => null,
+  loading: false,
 });
 
 export function PokemonProvider({ children }: PokemonProviderProps) {
   const [pokemons, dispatchPokemons] = useReducer(pokemonsReducer, null);
 
   const result = useMemo(
-    () => ({ pokemons, dispatch: dispatchPokemons }),
+    () => ({
+      pokemons,
+      dispatch: dispatchPokemons,
+      loading: pokemons?.loading,
+    }),
     [pokemons],
   );
 
@@ -72,8 +81,11 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 }
 
 export const usePokemon = () => {
-  const { pokemons: pokemonCtx, dispatch } =
-    useContext<ContextPokemon>(PokemonContext);
+  const {
+    pokemons: pokemonCtx,
+    dispatch,
+    loading,
+  } = useContext<ContextPokemon>(PokemonContext);
 
-  return { pokemonCtx, dispatch };
+  return { pokemonCtx, dispatch, loading };
 };

@@ -15,17 +15,28 @@ export function InputComponent() {
   const { dispatch } = usePokemon();
 
   const handlePokemonName = async (name: string) => {
-    const response = await apolloClient.query({
-      query: GET_POKEMONS_BY_NAME,
-      variables: {
-        name: `%${name}%`,
-      },
-    });
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      });
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: response,
-    });
+      const response = await apolloClient.query({
+        query: GET_POKEMONS_BY_NAME,
+        variables: {
+          name: `%${name}%`,
+        },
+      });
+
+      dispatch({
+        type: 'SET_POKEMONS',
+        payload: response,
+      });
+
+      setValue('');
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +69,7 @@ export function InputComponent() {
         type="text"
         onChange={onChange}
         onKeyDown={handleKeyPress}
+        value={value}
       />
 
       <Container onClick={handleClick}>

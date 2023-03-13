@@ -6,9 +6,9 @@ import { usePokemon } from 'context/pokemonsContext';
 import { Container, Wrapper } from './styles';
 
 export function Pokemons({ pokemons }: PokemonsProps) {
-  const { pokemonCtx } = usePokemon();
+  const { pokemonCtx, loading } = usePokemon();
 
-  const loading = pokemonCtx?.loading;
+  const loadingPokemonCtx = pokemonCtx?.loading;
   const data = pokemonCtx?.data?.pokemon_v2_pokemon;
 
   return (
@@ -16,7 +16,7 @@ export function Pokemons({ pokemons }: PokemonsProps) {
       <SearchBar />
 
       <Container>
-        {loading ? (
+        {loadingPokemonCtx || !data || loading ? (
           <Loading />
         ) : (
           data?.map(pokemon => {

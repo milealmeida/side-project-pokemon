@@ -20,19 +20,28 @@ export function Type({ type }: TypeProps) {
   const { dispatch } = usePokemon();
 
   const handlePokemonType = async (pokemonType: string) => {
-    const response = await apolloClient.query({
-      query: GET_POKEMONS_BY_TYPE,
-      variables: {
-        type: pokemonType,
-        limit: PAGE_SIZE,
-        offset: PAGE_SIZE,
-      },
-    });
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      });
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: response,
-    });
+      const response = await apolloClient.query({
+        query: GET_POKEMONS_BY_TYPE,
+        variables: {
+          type: pokemonType,
+          limit: PAGE_SIZE,
+          offset: PAGE_SIZE,
+        },
+      });
+
+      dispatch({
+        type: 'SET_POKEMONS',
+        payload: response,
+      });
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
   };
 
   const handleClick = () => {
