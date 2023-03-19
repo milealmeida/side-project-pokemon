@@ -1,4 +1,4 @@
-import { Card, Pagination, SearchBar, Loading } from 'components';
+import { Card, Pagination, SearchBar, Loading, Modal } from 'components';
 import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
 import { usePokemon } from 'context/pokemonsContext';
@@ -14,6 +14,8 @@ export function Pokemons({ pokemons }: PokemonsProps) {
   return (
     <Wrapper>
       <SearchBar />
+
+      <Modal />
 
       <Container>
         {loadingPokemonCtx || !data || loading ? (
