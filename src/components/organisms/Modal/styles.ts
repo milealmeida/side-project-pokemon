@@ -116,6 +116,7 @@ export const StatsHeader = styled.div`
 
   h2 {
     margin: 0;
+    text-align: left;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;

@@ -42,8 +42,9 @@ export function Card({
     setOpenModal(true);
   };
 
-  const numberFormatted =
-    number ?? (parseInt(number, 10) + 1000).toString().slice(1);
+  const sumNumber = number + 1000;
+
+  const numberFormatted = number && sumNumber.toString().slice(1);
   const weightFormatted = weight && weight / 10;
   const heightFormatted = height && height / 10;
 
@@ -68,7 +69,7 @@ export function Card({
           height={heightFormatted}
           weight={weightFormatted}
           name={name}
-          number={number}
+          number={numberFormatted}
           types={types}
         />
       )}

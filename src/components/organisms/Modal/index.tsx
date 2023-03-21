@@ -9,6 +9,7 @@ import { createApolloClient } from 'graphql/apollo-client';
 
 import { GET_POKEMONS_STATS } from 'queries';
 
+import { Loading } from 'components/atoms/Loading';
 import { statsNames } from './content';
 
 import {
@@ -34,7 +35,7 @@ import {
 type ModalProps = {
   id: number;
   src: string;
-  number: number;
+  number: string | 0;
   name: string;
   types: PokemonV2Type;
   weight: number | null | undefined;
@@ -50,13 +51,14 @@ export function Modal({
   weight,
   height,
 }: ModalProps) {
+  const [loading, setLoading] = useState(false);
   const [close, setClose] = useState(true);
   const [pokemon, setPokemon] = useState([
     {
       pokemon_v2_pokemonstats: [
         {
-          stat_id: number,
-          base_stat: number,
+          stat_id: 0,
+          base_stat: 0,
         },
       ],
     },
@@ -70,6 +72,8 @@ export function Modal({
 
   const handlePokemon = async () => {
     try {
+      setLoading(true);
+
       const response = await apolloClient.query({
         query: GET_POKEMONS_STATS,
         variables: {
@@ -80,6 +84,7 @@ export function Modal({
       const data = response.data.pokemon_v2_pokemon;
 
       setPokemon(data);
+      setLoading(false);
     } catch {
       throw new Error('Ops! parece que algo deu errado, tente novamente.');
     }
@@ -187,18 +192,22 @@ export function Modal({
                 </div>
               </StatsHeader>
 
-              <Stats>
-                {statsUpdated.map(stat => (
-                  <Statistic key={stat.stat_id}>
-                    <span>{stat.stat_name}</span>
-                    <strong>{stat.base_stat}</strong>
+              {loading ? (
+                <Loading />
+              ) : (
+                <Stats>
+                  {statsUpdated.map(stat => (
+                    <Statistic key={stat.stat_id}>
+                      <span>{stat.stat_name}</span>
+                      <strong>{stat.base_stat}</strong>
 
-                    <Bars>
-                      <Bar percent={stat.base_stat} className="percent" />
-                    </Bars>
-                  </Statistic>
-                ))}
-              </Stats>
+                      <Bars>
+                        <Bar percent={stat.base_stat} className="percent" />
+                      </Bars>
+                    </Statistic>
+                  ))}
+                </Stats>
+              )}
             </div>
           </Container>
         </Wrapper>
