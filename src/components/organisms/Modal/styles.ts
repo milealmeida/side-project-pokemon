@@ -49,6 +49,7 @@ export const Number = styled.strong`
 `;
 
 export const Title = styled.h1`
+  text-transform: capitalize;
   font-family: 'Montserrat';
   font-size: 3.2rem;
   line-height: 4.3rem;

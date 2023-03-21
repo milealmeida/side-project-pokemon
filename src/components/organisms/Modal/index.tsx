@@ -1,7 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { Type } from 'components/atoms/Type';
+
+import { PokemonTypes, PokemonV2Type } from 'types';
+
+import { createApolloClient } from 'graphql/apollo-client';
+
+import { GET_POKEMONS_STATS } from 'queries';
+
+// import { stats } from './content';
 
 import {
   Bar,
@@ -22,14 +30,66 @@ import {
   Types,
   Wrapper,
 } from './styles';
-import { stats } from './content';
 
-export function Modal() {
+type ModalProps = {
+  id: number;
+  src: string;
+  number: number;
+  name: string;
+  types: PokemonV2Type;
+  weight: number | null | undefined;
+  height: number | null | undefined;
+};
+
+export function Modal({
+  id,
+  src,
+  number,
+  name,
+  types,
+  weight,
+  height,
+}: ModalProps) {
   const [close, setClose] = useState(true);
+  const [pokemon, setPokemon] = useState([
+    {
+      pokemon_v2_pokemonstats: [
+        {
+          stat_id: number,
+          base_stat: number,
+        },
+      ],
+    },
+  ]);
 
   const handleCloseModal = () => {
     setClose(false);
   };
+
+  const apolloClient = createApolloClient();
+
+  const handlePokemon = async () => {
+    try {
+      const response = await apolloClient.query({
+        query: GET_POKEMONS_STATS,
+        variables: {
+          id,
+        },
+      });
+
+      const data = response.data.pokemon_v2_pokemon;
+
+      setPokemon(data);
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
+  };
+
+  const stats = pokemon[0].pokemon_v2_pokemonstats;
+
+  useEffect(() => {
+    handlePokemon();
+  }, []);
 
   return (
     <>
@@ -39,19 +99,23 @@ export function Modal() {
             <Card>
               <Img>
                 <Image
-                  src="/img/charizard.png"
-                  alt="Charizard"
+                  src={src}
+                  alt={name}
                   fill
                   style={{ objectFit: 'contain' }}
                 />
               </Img>
 
-              <Number>#006</Number>
-              <Title>Charizard</Title>
+              <Number>#{number}</Number>
+              <Title>{name}</Title>
 
               <Types>
-                <Type type="flying" />
-                <Type type="fire" />
+                {types.slice(0, 2).map(type => (
+                  <Type
+                    key={type.pokemon_v2_type.id}
+                    type={type.pokemon_v2_type.name as PokemonTypes}
+                  />
+                ))}
               </Types>
 
               <Info>
@@ -63,7 +127,7 @@ export function Modal() {
                       width={20}
                       height={20}
                     />
-                    90.5 kg
+                    {weight} kg
                   </Content>
                   <p>Peso</p>
                 </Box>
@@ -76,7 +140,7 @@ export function Modal() {
                       width={20}
                       height={20}
                     />
-                    1.7 m
+                    {height} m
                   </Content>
                   <p>Altura</p>
                 </Box>
@@ -110,13 +174,13 @@ export function Modal() {
               </StatsHeader>
 
               <Stats>
-                {stats.map(item => (
-                  <Statistic key={item.id}>
-                    <span>{item.name}</span>
-                    <strong>{item.percent}</strong>
+                {stats.map(stat => (
+                  <Statistic key={stat.stat_id}>
+                    <span>{stat.stat_id}</span>
+                    <strong>{stat.base_stat}</strong>
 
                     <Bars>
-                      <Bar percent={item.percent} className="percent" />
+                      <Bar percent={stat.base_stat} className="percent" />
                     </Bars>
                   </Statistic>
                 ))}

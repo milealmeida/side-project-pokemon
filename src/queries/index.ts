@@ -58,3 +58,14 @@ export const GET_POKEMONS_BY_NAME = gql`
     }
   }
 `;
+
+export const GET_POKEMONS_STATS = gql`
+  query pokeAPIquery($id: Int!) {
+    pokemon_v2_pokemon(where: { id: { _eq: $id } }) {
+      pokemon_v2_pokemonstats {
+        base_stat
+        stat_id
+      }
+    }
+  }
+`;

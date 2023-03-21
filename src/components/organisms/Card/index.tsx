@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { PokemonTypes, PokemonV2Type } from 'types';
 import { Type } from '../../atoms/Type';
+import { Modal } from '../Modal';
 
 import {
   Container,
@@ -34,6 +36,12 @@ export function Card({
   height,
   bgColor,
 }: CardProps) {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
   const numberFormatted =
     number ?? (parseInt(number, 10) + 1000).toString().slice(1);
   const weightFormatted = weight && weight / 10;
@@ -53,6 +61,18 @@ export function Card({
 
   return (
     <Wrapper>
+      {openModal && (
+        <Modal
+          id={number}
+          src={img}
+          height={heightFormatted}
+          weight={weightFormatted}
+          name={name}
+          number={number}
+          types={types}
+        />
+      )}
+
       <Blur bgColor={bgColor} />
 
       <Image
@@ -103,7 +123,7 @@ export function Card({
           </Info>
         </Container>
 
-        <Details bgColor={bgColor}>
+        <Details bgColor={bgColor} onClick={handleOpenModal}>
           <Image
             src="/img/svg/bolt.svg"
             alt="Íconde de um raio"
