@@ -1,26 +1,26 @@
-export const stats = [
+export const statsNames = [
   {
     id: 1,
-    name: 'HP',
+    stat_name: 'HP',
   },
   {
     id: 2,
-    name: 'Attack',
+    stat_name: 'Attack',
   },
   {
     id: 3,
-    name: 'Defense',
+    stat_name: 'Defense',
   },
   {
     id: 4,
-    name: 'Sp. Atk',
+    stat_name: 'Sp. Atk',
   },
   {
     id: 5,
-    name: 'Sp. Def',
+    stat_name: 'Sp. Def',
   },
   {
     id: 6,
-    name: 'Speed',
+    stat_name: 'Speed',
   },
 ];

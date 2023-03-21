@@ -9,7 +9,7 @@ import { createApolloClient } from 'graphql/apollo-client';
 
 import { GET_POKEMONS_STATS } from 'queries';
 
-// import { stats } from './content';
+import { statsNames } from './content';
 
 import {
   Bar,
@@ -86,6 +86,20 @@ export function Modal({
   };
 
   const stats = pokemon[0].pokemon_v2_pokemonstats;
+
+  const statsUpdated = stats.map(objectStats => {
+    const findStateNameById = statsNames.find(
+      objectStatsName => objectStatsName.id === objectStats.stat_id,
+    );
+
+    if (findStateNameById) {
+      const { stat_name } = findStateNameById;
+
+      return { ...objectStats, stat_name };
+    }
+
+    return { ...objectStats, stat_name: 'HP' };
+  });
 
   useEffect(() => {
     handlePokemon();
@@ -174,9 +188,9 @@ export function Modal({
               </StatsHeader>
 
               <Stats>
-                {stats.map(stat => (
+                {statsUpdated.map(stat => (
                   <Statistic key={stat.stat_id}>
-                    <span>{stat.stat_id}</span>
+                    <span>{stat.stat_name}</span>
                     <strong>{stat.base_stat}</strong>
 
                     <Bars>
