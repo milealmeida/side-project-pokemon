@@ -12,6 +12,14 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   padding: 3.6rem;
+  opacity: 0;
+  transition: all 100ms ease-in-out;
+  pointer-events: none;
+
+  &.show {
+    pointer-events: visible;
+    opacity: 1;
+  }
 `;
 
 export const Container = styled.div`
@@ -24,6 +32,12 @@ export const Container = styled.div`
   width: 100%;
   border-radius: 1.6rem;
   color: ${({ theme }) => theme.colors.white};
+  transform: translateY(-20rem);
+  transition: all 100ms ease-in-out;
+
+  .show & {
+    transform: translateY(0);
+  }
 `;
 
 export const Card = styled.div`
@@ -31,6 +45,27 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const Ellipsis = styled.div`
+  z-index: -1;
+  position: absolute;
+  left: -7.2rem;
+  top: -4rem;
+  border-radius: 1.6rem;
+  height: 39rem;
+  width: 110rem;
+  overflow: hidden;
+`;
+
+export const Ellipsi = styled.div<{ color: string }>`
+  position: absolute;
+  left: 10rem;
+  top: -1rem;
+  width: 20rem;
+  height: 20rem;
+  background: ${({ color }) => color};
+  filter: blur(12.8rem);
 `;
 
 export const Img = styled.div`

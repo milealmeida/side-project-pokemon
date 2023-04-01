@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { PokemonTypes, PokemonV2Type } from 'types';
 import { Type } from '../../atoms/Type';
@@ -42,6 +42,10 @@ export function Card({
     setOpenModal(true);
   };
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   const sumNumber = number + 1000;
 
   const numberFormatted = number && sumNumber.toString().slice(1);
@@ -62,17 +66,17 @@ export function Card({
 
   return (
     <Wrapper>
-      {openModal && (
-        <Modal
-          id={number}
-          src={img}
-          height={heightFormatted}
-          weight={weightFormatted}
-          name={name}
-          number={numberFormatted}
-          types={types}
-        />
-      )}
+      <Modal
+        id={number}
+        src={img}
+        height={heightFormatted}
+        weight={weightFormatted}
+        name={name}
+        number={numberFormatted}
+        types={types}
+        openModal={openModal}
+        closeModal={handleCloseModal}
+      />
 
       <Blur bgColor={bgColor} />
 
