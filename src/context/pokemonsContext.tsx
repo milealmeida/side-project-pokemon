@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {
   createContext,
   useReducer,
@@ -27,9 +28,14 @@ type PokemonDataProps = {
   loading: boolean;
 };
 
+export enum PokemonContextActionTypes {
+  SET_POKEMON = 'SET_POKEMON',
+  SET_LOADING = 'SET_LOADING',
+}
+
 type ActionType = {
   type: string;
-  // payload: PokeApIqueryQueryResult | PokemonDataProps | boolean;
+  // payload: PokeApIqueryQueryResult | PokemonDataProps | boolean | null;
   payload: any;
 };
 
@@ -44,14 +50,14 @@ type PokemonProviderProps = {
 };
 
 const pokemonsReducer = (
-  state: PokeApIqueryQueryResult | PokemonDataProps | null,
-  action: ActionType,
+  state: PokeApIqueryQueryResult | PokemonDataProps | null | boolean,
+  { type, payload }: ActionType,
 ) => {
-  switch (action.type) {
-    case 'SET_POKEMONS':
-      return action.payload;
-    case 'SET_LOADING':
-      return action.payload;
+  switch (type) {
+    case PokemonContextActionTypes.SET_POKEMON:
+      return payload;
+    case PokemonContextActionTypes.SET_LOADING:
+      return payload;
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { Type } from 'components/atoms/Type';
@@ -11,6 +11,7 @@ import { GET_POKEMONS_STATS } from 'queries';
 
 import { Loading } from 'components/atoms/Loading';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
+import { useEventListener } from 'hooks/useEventListener';
 import { statsNames } from './content';
 
 import {
@@ -72,6 +73,14 @@ export function Modal({
 
   const apolloClient = createApolloClient();
 
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  };
+
+  useEventListener('keydown', handleKeyDown);
+
   const handlePokemon = async () => {
     try {
       setLoading(true);
@@ -110,23 +119,6 @@ export function Modal({
 
     return { ...objectStats, stat_name: 'HP' };
   });
-
-  const handleCloseOnEscapeKeyDown = useCallback(
-    (e: any) => {
-      if ((e.charCode || e.keyCode) === 27) {
-        closeModal();
-      }
-    },
-    [closeModal],
-  );
-
-  useEffect(() => {
-    document.body.addEventListener('keydown', handleCloseOnEscapeKeyDown);
-
-    return function cleanup() {
-      document.body.removeEventListener('keydown', handleCloseOnEscapeKeyDown);
-    };
-  }, [handleCloseOnEscapeKeyDown]);
 
   useEffect(() => {
     handlePokemon();

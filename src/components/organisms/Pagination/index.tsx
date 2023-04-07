@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { DOTS, usePagination } from 'hooks/usePagination';
 import { PokemonsProps } from 'types';
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 
 import { GET_POKEMONS, PAGE_SIZE } from 'queries';
 import { Button, Wrapper } from './styles';
@@ -26,7 +26,7 @@ export function Pagination({ pokemons }: PokemonsProps) {
   const handlePage = async (pagePosition: number) => {
     try {
       dispatch({
-        type: 'SET_LOADING',
+        type: PokemonContextActionTypes.SET_LOADING,
         payload: true,
       });
 
@@ -39,7 +39,7 @@ export function Pagination({ pokemons }: PokemonsProps) {
       });
 
       dispatch({
-        type: 'SET_POKEMONS',
+        type: PokemonContextActionTypes.SET_POKEMON,
         payload: response,
       });
     } catch {
@@ -79,12 +79,12 @@ export function Pagination({ pokemons }: PokemonsProps) {
 
   useEffect(() => {
     dispatch({
-      type: 'SET_LOADING',
+      type: PokemonContextActionTypes.SET_LOADING,
       payload: true,
     });
 
     dispatch({
-      type: 'SET_POKEMONS',
+      type: PokemonContextActionTypes.SET_POKEMON,
       payload: pokemons,
     });
   }, [dispatch, pokemons]);

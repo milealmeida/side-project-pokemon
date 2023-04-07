@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { createApolloClient } from 'graphql/apollo-client';
 
 import { PokemonTypes } from 'types';
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 import { GET_POKEMONS, PAGE_SIZE } from 'queries';
 
 import { Type } from '../../atoms/Type';
@@ -32,7 +32,7 @@ export function SearchBar() {
   const handlePage = async () => {
     try {
       dispatch({
-        type: 'SET_LOADING',
+        type: PokemonContextActionTypes.SET_LOADING,
         payload: true,
       });
 
@@ -45,7 +45,7 @@ export function SearchBar() {
       });
 
       dispatch({
-        type: 'SET_POKEMONS',
+        type: PokemonContextActionTypes.SET_POKEMON,
         payload: pokemonsData,
       });
     } catch {

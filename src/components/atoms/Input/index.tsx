@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import Image from 'next/image';
 import { createApolloClient } from 'graphql/apollo-client';
 
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 import { GET_POKEMONS_BY_NAME } from 'queries';
 
 import { Container, Input, Wrapper } from './styles';
@@ -17,7 +17,7 @@ export function InputComponent() {
   const handlePokemonName = async (name: string) => {
     try {
       dispatch({
-        type: 'SET_LOADING',
+        type: PokemonContextActionTypes.SET_LOADING,
         payload: true,
       });
 
@@ -29,7 +29,7 @@ export function InputComponent() {
       });
 
       dispatch({
-        type: 'SET_POKEMONS',
+        type: PokemonContextActionTypes.SET_POKEMON,
         payload: response,
       });
 
@@ -45,11 +45,8 @@ export function InputComponent() {
     setValue(newValue);
   };
 
-  const handleKeyPress = (event: any) => {
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const newValue = event.target.value;
-      setValue(newValue);
-
       if (value) {
         handlePokemonName(value);
       }

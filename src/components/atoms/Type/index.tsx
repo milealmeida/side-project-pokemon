@@ -3,7 +3,7 @@ import { createApolloClient } from 'graphql/apollo-client';
 
 import { PokemonTypes } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 import { GET_POKEMONS_BY_TYPE, PAGE_SIZE } from 'queries';
 
 import { Wrapper } from './styles';
@@ -22,7 +22,7 @@ export function Type({ type }: TypeProps) {
   const handlePokemonType = async (pokemonType: string) => {
     try {
       dispatch({
-        type: 'SET_LOADING',
+        type: PokemonContextActionTypes.SET_LOADING,
         payload: true,
       });
 
@@ -36,7 +36,7 @@ export function Type({ type }: TypeProps) {
       });
 
       dispatch({
-        type: 'SET_POKEMONS',
+        type: PokemonContextActionTypes.SET_POKEMON,
         payload: response,
       });
     } catch {
