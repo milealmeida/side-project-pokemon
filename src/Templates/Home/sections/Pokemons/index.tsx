@@ -1,14 +1,15 @@
-import { Card, Pagination, SearchBar } from 'components';
-import { PokemonsProps, PokemonTypes, PokemonV2Type } from 'types';
-import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
+import { Pagination, SearchBar, Loading, Cards } from 'components';
+
+import { PokemonsProps } from 'types';
+
 import { usePokemon } from 'context/pokemonsContext';
 
 import { Container, Wrapper } from './styles';
 
 export function Pokemons({ pokemons }: PokemonsProps) {
-  const { pokemonCtx } = usePokemon();
+  const { pokemonCtx, loading } = usePokemon();
 
-  const loading = pokemonCtx?.loading;
+  const loadingPokemonCtx = pokemonCtx?.loading;
   const data = pokemonCtx?.data?.pokemon_v2_pokemon;
 
   return (
@@ -16,26 +17,7 @@ export function Pokemons({ pokemons }: PokemonsProps) {
       <SearchBar />
 
       <Container>
-        {!loading &&
-          data?.map(pokemon => {
-            const pokemonTypes = pokemon.pokemon_v2_pokemontypes[0]
-              .pokemon_v2_type?.name as PokemonTypes;
-
-            const { color } = getFormattedPokemonType(pokemonTypes);
-
-            return (
-              <Card
-                key={pokemon.id}
-                bgColor={color}
-                src={pokemon.id}
-                number={pokemon.id}
-                name={pokemon.name}
-                types={pokemon.pokemon_v2_pokemontypes as PokemonV2Type}
-                weight={pokemon.weight}
-                height={pokemon.height}
-              />
-            );
-          })}
+        {loadingPokemonCtx || !data || loading ? <Loading /> : <Cards />}
       </Container>
 
       <Pagination pokemons={pokemons} />

@@ -1,9 +1,11 @@
+import { MutableRefObject, useRef } from 'react';
 import Image from 'next/image';
+import { createApolloClient } from 'graphql/apollo-client';
 
 import { PokemonTypes } from 'types';
-import { usePokemon } from 'context/pokemonsContext';
-import { createApolloClient } from 'graphql/apollo-client';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 import { GET_POKEMONS, PAGE_SIZE } from 'queries';
+
 import { Type } from '../../atoms/Type';
 import { InputComponent } from '../../atoms/Input';
 import { types } from './types';
@@ -25,19 +27,38 @@ export function SearchBar() {
 
   const apolloClient = createApolloClient();
 
-  const handlePage = async () => {
-    const pokemonsData = await apolloClient.query({
-      query: GET_POKEMONS,
-      variables: {
-        limit: PAGE_SIZE,
-        offset: 0,
-      },
-    });
+  const carousel = useRef() as MutableRefObject<HTMLDivElement>;
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: pokemonsData,
-    });
+  const handlePage = async () => {
+    try {
+      dispatch({
+        type: PokemonContextActionTypes.SET_LOADING,
+        payload: true,
+      });
+
+      const pokemonsData = await apolloClient.query({
+        query: GET_POKEMONS,
+        variables: {
+          limit: PAGE_SIZE,
+          offset: 0,
+        },
+      });
+
+      dispatch({
+        type: PokemonContextActionTypes.SET_POKEMON,
+        payload: pokemonsData,
+      });
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
+  };
+
+  const handleLeftClick = () => {
+    carousel.current.scrollLeft -= carousel.current.offsetWidth;
+  };
+
+  const handleRightClick = () => {
+    carousel.current.scrollLeft += carousel.current.offsetWidth;
   };
 
   return (
@@ -54,7 +75,7 @@ export function SearchBar() {
       <Title>Pesquisar por tipos</Title>
       <Container>
         <Box>
-          <LeftArrow>
+          <LeftArrow onClick={handleLeftClick}>
             <Image
               src="/img/svg/left-arrow.svg"
               alt="Ícone de uma seta apontada para esquerda"
@@ -63,13 +84,13 @@ export function SearchBar() {
             />
           </LeftArrow>
 
-          <Types>
+          <Types ref={carousel}>
             {types.map(({ id, type }) => (
               <Type key={id} type={type as PokemonTypes} />
             ))}
           </Types>
 
-          <RightArrow>
+          <RightArrow onClick={handleRightClick}>
             <Image
               src="/img/svg/right-arrow.svg"
               alt="Ícone de uma seta apontada para direita"

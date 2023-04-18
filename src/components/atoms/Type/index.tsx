@@ -3,7 +3,7 @@ import { createApolloClient } from 'graphql/apollo-client';
 
 import { PokemonTypes } from 'types';
 import { getFormattedPokemonType } from 'utils/getFormattedPokemonType';
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 import { GET_POKEMONS_BY_TYPE, PAGE_SIZE } from 'queries';
 
 import { Wrapper } from './styles';
@@ -20,19 +20,28 @@ export function Type({ type }: TypeProps) {
   const { dispatch } = usePokemon();
 
   const handlePokemonType = async (pokemonType: string) => {
-    const response = await apolloClient.query({
-      query: GET_POKEMONS_BY_TYPE,
-      variables: {
-        type: pokemonType,
-        limit: PAGE_SIZE,
-        offset: PAGE_SIZE,
-      },
-    });
+    try {
+      dispatch({
+        type: PokemonContextActionTypes.SET_LOADING,
+        payload: true,
+      });
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: response,
-    });
+      const response = await apolloClient.query({
+        query: GET_POKEMONS_BY_TYPE,
+        variables: {
+          type: pokemonType,
+          limit: PAGE_SIZE,
+          offset: PAGE_SIZE,
+        },
+      });
+
+      dispatch({
+        type: PokemonContextActionTypes.SET_POKEMON,
+        payload: response,
+      });
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
   };
 
   const handleClick = () => {

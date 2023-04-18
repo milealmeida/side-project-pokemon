@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { DOTS, usePagination } from 'hooks/usePagination';
 import { PokemonsProps } from 'types';
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 
 import { GET_POKEMONS, PAGE_SIZE } from 'queries';
 import { Button, Wrapper } from './styles';
@@ -24,18 +24,27 @@ export function Pagination({ pokemons }: PokemonsProps) {
   const apolloClient = createApolloClient();
 
   const handlePage = async (pagePosition: number) => {
-    const response = await apolloClient.query({
-      query: GET_POKEMONS,
-      variables: {
-        limit: PAGE_SIZE,
-        offset: pagePosition * PAGE_SIZE,
-      },
-    });
+    try {
+      dispatch({
+        type: PokemonContextActionTypes.SET_LOADING,
+        payload: true,
+      });
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: response,
-    });
+      const response = await apolloClient.query({
+        query: GET_POKEMONS,
+        variables: {
+          limit: PAGE_SIZE,
+          offset: pagePosition * PAGE_SIZE,
+        },
+      });
+
+      dispatch({
+        type: PokemonContextActionTypes.SET_POKEMON,
+        payload: response,
+      });
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
   };
 
   const prevPage = () => {
@@ -70,7 +79,12 @@ export function Pagination({ pokemons }: PokemonsProps) {
 
   useEffect(() => {
     dispatch({
-      type: 'SET_POKEMONS',
+      type: PokemonContextActionTypes.SET_LOADING,
+      payload: true,
+    });
+
+    dispatch({
+      type: PokemonContextActionTypes.SET_POKEMON,
       payload: pokemons,
     });
   }, [dispatch, pokemons]);

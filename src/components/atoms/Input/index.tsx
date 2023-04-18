@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import Image from 'next/image';
 import { createApolloClient } from 'graphql/apollo-client';
 
-import { usePokemon } from 'context/pokemonsContext';
+import { PokemonContextActionTypes, usePokemon } from 'context/pokemonsContext';
 import { GET_POKEMONS_BY_NAME } from 'queries';
 
 import { Container, Input, Wrapper } from './styles';
@@ -15,23 +15,42 @@ export function InputComponent() {
   const { dispatch } = usePokemon();
 
   const handlePokemonName = async (name: string) => {
-    const response = await apolloClient.query({
-      query: GET_POKEMONS_BY_NAME,
-      variables: {
-        name: `%${name}%`,
-      },
-    });
+    try {
+      dispatch({
+        type: PokemonContextActionTypes.SET_LOADING,
+        payload: true,
+      });
 
-    dispatch({
-      type: 'SET_POKEMONS',
-      payload: response,
-    });
+      const response = await apolloClient.query({
+        query: GET_POKEMONS_BY_NAME,
+        variables: {
+          name: `%${name}%`,
+        },
+      });
+
+      dispatch({
+        type: PokemonContextActionTypes.SET_POKEMON,
+        payload: response,
+      });
+
+      setValue('');
+    } catch {
+      throw new Error('Ops! parece que algo deu errado, tente novamente.');
+    }
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
 
     setValue(newValue);
+  };
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (value) {
+        handlePokemonName(value);
+      }
+    }
   };
 
   const handleClick = () => {
@@ -42,7 +61,13 @@ export function InputComponent() {
 
   return (
     <Wrapper>
-      <Input placeholder="Pesquisar Pokémon" type="text" onChange={onChange} />
+      <Input
+        placeholder="Pesquisar Pokémon"
+        type="text"
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+        value={value}
+      />
 
       <Container onClick={handleClick}>
         <Image

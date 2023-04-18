@@ -13,6 +13,12 @@ export const Wrapper = styled.div`
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
 
+  .who {
+    position: absolute;
+    top: -12rem;
+    right: 8rem;
+  }
+
   .pokemon {
     position: absolute;
     top: -17.2rem;
@@ -23,6 +29,10 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 
 export const Blur = styled.div<BgColorProps>`
