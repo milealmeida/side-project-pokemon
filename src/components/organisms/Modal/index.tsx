@@ -42,8 +42,8 @@ type ModalProps = {
   number: string | 0;
   name: string;
   types: PokemonV2Type;
-  weight: number | null | undefined;
-  height: number | null | undefined;
+  weight?: number | null;
+  height?: number | null;
   openModal: boolean;
   closeModal: () => void;
 };
